@@ -1,0 +1,347 @@
+.about {
+  width: 100%;
+}
+
+/* Main About Section */
+.about-main {
+  padding: 100px 50px 80px;
+  background: #fff;
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.page-title h1 {
+  font-size: 3rem;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.page-title .subtitle {
+  font-size: 1.3rem;
+  color: #666;
+}
+
+.about-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.about-text h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.about-text p {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.about-text strong {
+  color: #667eea;
+  font-weight: 600;
+}
+
+.about-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-placeholder {
+  width: 350px;
+  height: 350px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
+  animation: float 3s ease-in-out infinite;
+}
+
+.placeholder-icon {
+  font-size: 10rem;
+  color: white;
+  opacity: 0.9;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Vision Section */
+.vision-section {
+  padding: 80px 50px;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: white;
+  text-align: center;
+}
+
+.vision-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.vision-icon-wrapper,
+.mission-icon-wrapper {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.section-icon {
+  font-size: 3rem;
+  color: #1e3c72;
+}
+
+.vision-section h2,
+.mission-section h2 {
+  font-size: 2.8rem;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.vision-content,
+.mission-content {
+  font-size: 1.25rem;
+  line-height: 1.9;
+  opacity: 0.95;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Mission Section */
+.mission-section {
+  padding: 80px 50px;
+  background: #f8f9fa;
+  text-align: center;
+}
+
+.mission-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.mission-section h2 {
+  color: #333;
+}
+
+.mission-content {
+  color: #555;
+}
+
+.mission-icon-wrapper .section-icon {
+  color: #667eea;
+}
+
+/* Values Section */
+.values-section {
+  padding: 80px 50px;
+  background: white;
+}
+
+.values-section h2 {
+  text-align: center;
+  font-size: 2.8rem;
+  color: #333;
+  margin-bottom: 60px;
+  font-weight: 700;
+}
+
+.values-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+}
+
+.value-card {
+  background: #f8f9fa;
+  padding: 40px;
+  border-radius: 15px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.value-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  border-color: #667eea;
+  background: white;
+}
+
+.value-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px;
+}
+
+.value-icon svg {
+  font-size: 2.2rem;
+  color: white;
+}
+
+.value-card h3 {
+  font-size: 1.6rem;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.value-card p {
+  color: #666;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+/* Difference Section */
+.difference-section {
+  padding: 80px 50px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.difference-section h2 {
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 60px;
+  font-weight: 700;
+}
+
+.difference-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+}
+
+.difference-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.difference-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-10px);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.difference-number {
+  font-size: 3rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 20px;
+}
+
+.difference-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.difference-item p {
+  line-height: 1.7;
+  opacity: 0.95;
+  font-size: 1.05rem;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .image-placeholder {
+    width: 300px;
+    height: 300px;
+  }
+
+  .placeholder-icon {
+    font-size: 8rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .about-main,
+  .vision-section,
+  .mission-section,
+  .values-section,
+  .difference-section {
+    padding: 60px 30px;
+  }
+
+  .page-title h1 {
+    font-size: 2.2rem;
+  }
+
+  .page-title .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .about-text h2,
+  .vision-section h2,
+  .mission-section h2,
+  .values-section h2,
+  .difference-section h2 {
+    font-size: 2rem;
+  }
+
+  .about-text p,
+  .vision-content,
+  .mission-content {
+    font-size: 1.05rem;
+  }
+
+  .image-placeholder {
+    width: 250px;
+    height: 250px;
+  }
+
+  .placeholder-icon {
+    font-size: 6rem;
+  }
+
+  .values-grid,
+  .difference-container {
+    grid-template-columns: 1fr;
+  }
+}
