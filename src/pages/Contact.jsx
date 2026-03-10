@@ -278,18 +278,23 @@ const Contact = () => {
               <div className="form-group">
                 <label htmlFor="phone">Phone Number *</label>
                 <div className={`phone-input-wrapper ${touched.phone && fieldErrors.phone ? 'input-error' : touched.phone && !fieldErrors.phone && formData.phone ? 'input-success' : ''}`}>
-                  <select
-                    className="country-code-select"
-                    value={countryCode}
-                    onChange={e => setCountryCode(e.target.value)}
-                    disabled={loading}
-                  >
-                    {COUNTRY_CODES.map((c, i) => (
-                      <option key={i} value={c.code}>
-                        {c.flag} {c.country} ({c.code})
-                      </option>
-                    ))}
-                  </select>
+                  <div className="cc-display">
+                    <span className="cc-flag">{COUNTRY_CODES.find(c => c.code === countryCode)?.flag || '🌐'}</span>
+                    <select
+                      className="country-code-select"
+                      value={countryCode}
+                      onChange={e => setCountryCode(e.target.value)}
+                      disabled={loading}
+                      title="Select country code"
+                    >
+                      {COUNTRY_CODES.map((c, i) => (
+                        <option key={i} value={c.code}>
+                          {c.flag} {c.code} {c.country}
+                        </option>
+                      ))}
+                    </select>
+                    <span className="cc-code">{countryCode}</span>
+                  </div>
                   <input
                     type="tel"
                     id="phone"

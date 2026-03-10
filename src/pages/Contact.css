@@ -316,23 +316,43 @@
   box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
 }
 
-.country-code-select {
-  border: none;
+.cc-display {
+  display: flex;
+  align-items: center;
+  position: relative;
   border-right: 2px solid #e0e0e0;
   background: #f1f5f9;
-  padding: 0 10px;
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: #1e293b;
   height: 50px;
+  padding: 0 8px;
+  gap: 4px;
   cursor: pointer;
-  outline: none;
-  min-width: 160px;
-  border-radius: 0;
+}
+
+.cc-flag {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.cc-code {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #1e293b;
+  white-space: nowrap;
+}
+
+.country-code-select {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
 }
 
 .country-code-select:focus {
-  background: #e2e8f0;
+  outline: none;
 }
 
 .phone-input-wrapper input {
