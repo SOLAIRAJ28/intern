@@ -1,9 +1,10 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { FaStar, FaQuoteLeft, FaUserGraduate, FaChevronLeft, FaChevronRight, FaBriefcase, FaGraduationCap, FaRocket, FaHandshake } from 'react-icons/fa';
 import './Learners.css';
 
 const Learners = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const carouselRef = useRef(null);
   
   const testimonials = [
@@ -95,6 +96,24 @@ const Learners = () => {
     }
   };
 
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      setCurrentSlide(prev => {
+        const newIndex = prev < testimonials.length - 1 ? prev + 1 : 0;
+        if (carouselRef.current) {
+          const card = carouselRef.current.querySelector('.testimonial-card');
+          if (card) {
+            const cardWidth = card.offsetWidth + 30;
+            carouselRef.current.scrollTo({ left: cardWidth * newIndex, behavior: 'smooth' });
+          }
+        }
+        return newIndex;
+      });
+    }, 3500);
+    return () => clearInterval(timer);
+  }, [isPaused, testimonials.length]);
+
   return (
     <div className="learners">
       {/* Stats Section */}
@@ -142,6 +161,8 @@ const Learners = () => {
               className="testimonials-carousel" 
               ref={carouselRef}
               onScroll={handleScroll}
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
             >
               {testimonials.map((testimonial, index) => (
                 <div 
