@@ -7,13 +7,13 @@
 
 :root {
   /* Color Palette - Professional Orange Light Theme */
-  --primary-color: #ea580c;
-  --primary-light: #fb923c;
-  --primary-dark: #c2410c;
+  --primary-color: #d4166a;
+  --primary-light: #f04d96;
+  --primary-dark: #a0104f;
   --secondary-color: #475569;
   --accent-color: #f97316;
-  --light-orange: #fff7ed;
-  --medium-orange: #fed7aa;
+  --light-orange: #fdf0f7;
+  --medium-orange: #fce4f0;
   --text-dark: #1e293b;
   --text-medium: #475569;
   --text-light: #64748b;
@@ -21,9 +21,9 @@
   --medium-grey: #e2e8f0;
   --white: #ffffff;
   --success: #10b981;
-  --gradient-primary: linear-gradient(135deg, #ea580c 0%, #fb923c 100%);
-  --gradient-secondary: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
-  --gradient-hero: linear-gradient(135deg, #ffffff 0%, #fff7ed 100%);
+  --gradient-primary: linear-gradient(135deg, #d4166a 0%, #f04d96 100%);
+  --gradient-secondary: linear-gradient(135deg, #fdf0f7 0%, #fce4f0 100%);
+  --gradient-hero: linear-gradient(135deg, #ffffff 0%, #fdf0f7 100%);
   
   /* Typography */
   font-family: 'Inter', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;

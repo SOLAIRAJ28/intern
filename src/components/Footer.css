@@ -1,5 +1,5 @@
 .footer {
-  background: linear-gradient(135deg, #c2410c 0%, #ea580c 100%);
+  background: linear-gradient(135deg, #a0104f 0%, #d4166a 100%);
   color: #fff;
   padding: 60px 0 20px;
   margin-top: 80px;
@@ -86,7 +86,7 @@
 
 .social-icon:hover {
   background: #ffffff;
-  color: #ea580c;
+  color: #d4166a;
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
 }
