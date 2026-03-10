@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
-import { FaRobot, FaTimes, FaPaperPlane, FaUser, FaEllipsisV, FaTrash, FaPlus } from 'react-icons/fa';
+import { FaRobot, FaTimes, FaPaperPlane, FaUser, FaEllipsisV, FaTrash, FaPlus, FaChevronUp, FaChevronDown } from 'react-icons/fa';
 import './Chatbot.css';
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [showQuickReplies, setShowQuickReplies] = useState(true);
   
   // Query collection state
   const [isCollectingQuery, setIsCollectingQuery] = useState(false);
@@ -23,6 +24,12 @@ const Chatbot = () => {
     sender: 'bot',
     time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
   };
+
+  // Track asked questions
+  const [askedQuestions, setAskedQuestions] = useState(() => {
+    const saved = localStorage.getItem('askedQuestions');
+    return saved ? JSON.parse(saved) : [];
+  });
 
   // Load chat history from localStorage or start with welcome message
   const [messages, setMessages] = useState(() => {
@@ -49,6 +56,11 @@ const Chatbot = () => {
   useEffect(() => {
     localStorage.setItem('chatHistory', JSON.stringify(messages));
   }, [messages]);
+
+  // Save asked questions to localStorage
+  useEffect(() => {
+    localStorage.setItem('askedQuestions', JSON.stringify(askedQuestions));
+  }, [askedQuestions]);
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -274,7 +286,7 @@ const Chatbot = () => {
     setQueryFormData(prev => ({ ...prev, query: originalQuery }));
     
     const collectMsg = {
-      text: "I'd be happy to forward your query to our team.\n\nPlease provide your contact details in the following format:\n\nName: [Your Name]\nEmail: [Your Email]\nPhone: [Your Phone Number]\n\nExample:\nName: John Doe\nEmail: john@example.com\nPhone: 9876543210",
+      text: "Enter your Name, Email, and Phone (Shift+Enter for new line)",
       sender: 'bot',
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
@@ -286,63 +298,44 @@ const Chatbot = () => {
     const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     
     switch (queryStep) {
-      case 0: // Initial yes/no prompt for unrecognized queries
-        if (input.toLowerCase() === 'yes' || input.toLowerCase() === 'y') {
-          setQueryStep(1);
-          const detailsPrompt = {
-            text: "Please provide your contact details in the following format:\n\nName: [Your Name]\nEmail: [Your Email]\nPhone: [Your Phone Number]\n\nExample:\nName: John Doe\nEmail: john@example.com\nPhone: 9876543210",
-            sender: 'bot',
-            time: currentTime
-          };
-          setMessages(prev => [...prev, detailsPrompt]);
-        } else if (input.toLowerCase() === 'no' || input.toLowerCase() === 'n') {
-          resetQueryCollection();
-          const cancelMsg = {
-            text: "No problem.\n\nFeel free to ask me about:\n- Our training programs\n- Enrollment process\n- Fees & payment\n- Placement assistance\n- And more\n\nHow can I help you?",
-            sender: 'bot',
-            time: currentTime
-          };
-          setMessages(prev => [...prev, cancelMsg]);
-        } else {
-          // If they type something else, treat it as a new query - check if it matches known responses
-          const botResponse = getBotResponse(input);
-          if (botResponse !== "TRIGGER_QUERY_COLLECTION_WITH_MESSAGE") {
-            resetQueryCollection();
-            const botMsg = {
-              text: botResponse === "TRIGGER_QUERY_COLLECTION" ? "Please provide your contact details in the following format:\n\nName: [Your Name]\nEmail: [Your Email]\nPhone: [Your Phone Number]" : botResponse,
-              sender: 'bot',
-              time: currentTime
-            };
-            setMessages(prev => [...prev, botMsg]);
-            if (botResponse === "TRIGGER_QUERY_COLLECTION") {
-              setIsCollectingQuery(true);
-              setQueryStep(1);
-            }
-          } else {
-            // Still unrecognized, update the query and ask again
-            setQueryFormData(prev => ({ ...prev, query: input }));
-            const askAgainMsg = {
-              text: "Would you like me to forward this question to our team? Type 'yes' to proceed or 'no' to ask something else.",
-              sender: 'bot',
-              time: currentTime
-            };
-            setMessages(prev => [...prev, askAgainMsg]);
-          }
-        }
-        break;
-        
       case 1: // Collecting all details at once
-        // Parse the input for Name, Email, and Phone
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^[+]?[\d\s\-()]{10,}$/;
+        
+        let name = '';
+        let email = '';
+        let phone = '';
+        
+        // Try labeled format first: "Name: xxx", "Email: xxx", "Phone: xxx"
         const nameMatch = input.match(/name[:\s]*([^\n]+)/i);
         const emailMatch = input.match(/email[:\s]*([^\s\n]+)/i);
         const phoneMatch = input.match(/phone[:\s]*([^\n]+)/i);
         
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const phoneRegex = /^[+]?[\d\s\-()]{10,}$/;
+        if (nameMatch && emailMatch && phoneMatch) {
+          name = nameMatch[1].trim();
+          email = emailMatch[1].trim();
+          phone = phoneMatch[1].trim();
+        } else {
+          // Try simple format: each value on a new line (handle both \r\n and \n)
+          const lines = input.split(/[\r\n]+/).map(l => l.trim()).filter(l => l.length > 0);
+          
+          for (const line of lines) {
+            const digitsInLine = line.replace(/\D/g, '');
+            if (emailRegex.test(line)) {
+              email = line;
+            } else if (digitsInLine.length >= 9) {
+              // Line has 9+ digits - it's a phone number
+              phone = line;
+            } else if (!name && line.length >= 2 && !/^\d+$/.test(line)) {
+              // Not empty, not all digits - it's a name
+              name = line;
+            }
+          }
+        }
         
-        if (!nameMatch || !emailMatch || !phoneMatch) {
+        if (!name || !email || !phone) {
           const errorMsg = {
-            text: "Please provide all details in the correct format:\n\nName: [Your Name]\nEmail: [Your Email]\nPhone: [Your Phone Number]\n\nMake sure to include all three fields.",
+            text: "Enter Name, Email, Phone on separate lines (Shift+Enter for new line)",
             sender: 'bot',
             time: currentTime
           };
@@ -350,13 +343,9 @@ const Chatbot = () => {
           return;
         }
         
-        const name = nameMatch[1].trim();
-        const email = emailMatch[1].trim();
-        const phone = phoneMatch[1].trim();
-        
         if (name.length < 2) {
           const errorMsg = {
-            text: "Please enter a valid name (at least 2 characters).",
+            text: "Please enter a valid name.",
             sender: 'bot',
             time: currentTime
           };
@@ -366,7 +355,7 @@ const Chatbot = () => {
         
         if (!emailRegex.test(email)) {
           const errorMsg = {
-            text: "Please enter a valid email address.\nExample: yourname@example.com",
+            text: "Please enter a valid email address.",
             sender: 'bot',
             time: currentTime
           };
@@ -374,9 +363,10 @@ const Chatbot = () => {
           return;
         }
         
-        if (!phoneRegex.test(phone)) {
+        const digitsOnly = phone.replace(/\D/g, '');
+        if (digitsOnly.length < 9) {
           const errorMsg = {
-            text: "Please enter a valid phone number (at least 10 digits).",
+            text: "Please enter a valid phone number.",
             sender: 'bot',
             time: currentTime
           };
@@ -384,21 +374,20 @@ const Chatbot = () => {
           return;
         }
         
-        setQueryFormData(prev => ({ ...prev, name, email, phone }));
-        
-        // If there's already a query, go to confirmation
+        // If there's already a query, submit directly
         if (queryFormData.query) {
-          setQueryStep(5); // Skip to confirmation
-          const confirmMsg = {
-            text: "Please confirm your details:\n\nName: " + name + "\nEmail: " + email + "\nPhone: " + phone + "\n\nQuery:\n" + queryFormData.query + "\n\nType 'yes' to submit or 'no' to cancel.",
+          const submittingMsg = {
+            text: "Submitting your query...",
             sender: 'bot',
             time: currentTime
           };
-          setMessages(prev => [...prev, confirmMsg]);
+          setMessages(prev => [...prev, submittingMsg]);
+          submitQueryToServer({ ...queryFormData, name, email, phone });
         } else {
+          setQueryFormData(prev => ({ ...prev, name, email, phone }));
           setQueryStep(4);
           const queryPrompt = {
-            text: "Thank you. Please type your question or query in detail:",
+            text: "Please type your query:",
             sender: 'bot',
             time: currentTime
           };
@@ -407,50 +396,23 @@ const Chatbot = () => {
         break;
         
       case 4: // Collecting query
-        if (input.trim().length < 10) {
+        if (input.trim().length < 5) {
           const errorMsg = {
-            text: "Please provide more details about your query (at least 10 characters).",
+            text: "Please provide more details.",
             sender: 'bot',
             time: currentTime
           };
           setMessages(prev => [...prev, errorMsg]);
           return;
         }
-        setQueryFormData(prev => ({ ...prev, query: input.trim() }));
-        setQueryStep(5);
-        const confirmMsg = {
-          text: "Please confirm your details:\n\nName: " + queryFormData.name + "\nEmail: " + queryFormData.email + "\nPhone: " + queryFormData.phone + "\n\nQuery:\n" + input.trim() + "\n\nType 'yes' to submit or 'no' to cancel.",
+        const updatedFormData = { ...queryFormData, query: input.trim() };
+        const submittingMsg2 = {
+          text: "Submitting your query...",
           sender: 'bot',
           time: currentTime
         };
-        setMessages(prev => [...prev, confirmMsg]);
-        break;
-        
-      case 5: // Confirmation
-        if (input.toLowerCase() === 'yes' || input.toLowerCase() === 'y') {
-          const submittingMsg = {
-            text: "Submitting your query...",
-            sender: 'bot',
-            time: currentTime
-          };
-          setMessages(prev => [...prev, submittingMsg]);
-          submitQueryToServer(queryFormData);
-        } else if (input.toLowerCase() === 'no' || input.toLowerCase() === 'n' || input.toLowerCase() === 'cancel') {
-          resetQueryCollection();
-          const cancelMsg = {
-            text: "Query submission cancelled.\n\nFeel free to ask me anything else or try again later.",
-            sender: 'bot',
-            time: currentTime
-          };
-          setMessages(prev => [...prev, cancelMsg]);
-        } else {
-          const errorMsg = {
-            text: "Please type 'yes' to submit or 'no' to cancel.",
-            sender: 'bot',
-            time: currentTime
-          };
-          setMessages(prev => [...prev, errorMsg]);
-        }
+        setMessages(prev => [...prev, submittingMsg2]);
+        submitQueryToServer(updatedFormData);
         break;
         
       default:
@@ -494,16 +456,16 @@ const Chatbot = () => {
       // Check if unrecognized query should trigger collection with the original message
       if (botResponse === "TRIGGER_QUERY_COLLECTION_WITH_MESSAGE") {
         setIsTyping(false);
+        setUserQuery(currentInput);
+        setQueryFormData(prev => ({ ...prev, query: currentInput }));
         const promptMsg = {
-          text: "I don't have specific information about that.\\n\\nWould you like me to forward your question to our team? They'll get back to you with a detailed answer.\\n\\nType 'yes' to proceed or ask me something else.",
+          text: "Email us at info@shanrucktech.com or enter your Name, Email, Phone (Shift+Enter for new line)",
           sender: 'bot',
           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         };
         setMessages(prev => [...prev, promptMsg]);
-        setUserQuery(currentInput);
-        setQueryFormData(prev => ({ ...prev, query: currentInput }));
         setIsCollectingQuery(true);
-        setQueryStep(0); // Special step: waiting for yes/no
+        setQueryStep(1);
         return;
       }
       
@@ -518,8 +480,38 @@ const Chatbot = () => {
   };
 
   const handleQuickReply = (reply) => {
-    setInputMessage(reply);
-    setTimeout(() => handleSendMessage(), 100);
+    // Add to asked questions (except Submit a Query)
+    if (reply !== "Submit a Query") {
+      setAskedQuestions(prev => [...prev, reply]);
+    }
+    
+    // Add user message directly
+    const userMsg = {
+      text: reply,
+      sender: 'user',
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+    setMessages(prev => [...prev, userMsg]);
+    
+    // Handle special case for Submit a Query
+    if (reply === "Submit a Query") {
+      startQueryCollection('');
+      return;
+    }
+    
+    setIsTyping(true);
+    
+    // Get bot response
+    setTimeout(() => {
+      const botResponse = getBotResponse(reply);
+      const botMsg = {
+        text: botResponse,
+        sender: 'bot',
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      setMessages(prev => [...prev, botMsg]);
+      setIsTyping(false);
+    }, 1000);
   };
 
   const handleKeyPress = (e) => {
@@ -532,7 +524,9 @@ const Chatbot = () => {
   // Start a new chat
   const startNewChat = () => {
     setMessages([welcomeMessage]);
+    setAskedQuestions([]);
     localStorage.removeItem('chatHistory');
+    localStorage.removeItem('askedQuestions');
     setShowMenu(false);
     resetQueryCollection();
   };
@@ -638,33 +632,77 @@ const Chatbot = () => {
         </div>
 
         {/* Quick Replies */}
-        {messages.length <= 3 && (
-          <div className="quick-replies">
-            {quickReplies.map((reply, index) => (
-              <button
-                key={index}
-                className="quick-reply-btn"
-                onClick={() => handleQuickReply(reply)}
-              >
-                {reply}
-              </button>
-            ))}
+        {!isCollectingQuery && quickReplies.filter(reply => !askedQuestions.includes(reply)).length > 0 && (
+          <div className="quick-replies-container">
+            <button 
+              className="quick-replies-toggle"
+              onClick={() => setShowQuickReplies(!showQuickReplies)}
+            >
+              {showQuickReplies ? <FaChevronDown /> : <FaChevronUp />}
+              {showQuickReplies ? 'Hide suggestions' : 'Show suggestions'}
+            </button>
+            {showQuickReplies && (
+              <div className="quick-replies">
+                {quickReplies.filter(reply => !askedQuestions.includes(reply)).map((reply, index) => (
+                  <button
+                    key={index}
+                    className="quick-reply-btn"
+                    onClick={() => handleQuickReply(reply)}
+                  >
+                    {reply}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         )}
 
         {/* Chat Input */}
         <div className="chatbot-input">
-          <input
-            type="text"
-            placeholder="Type your message..."
-            value={inputMessage}
-            onChange={(e) => setInputMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
-          />
+          {isCollectingQuery && (
+            <button 
+              className="cancel-btn"
+              onClick={() => {
+                resetQueryCollection();
+                const cancelMsg = {
+                  text: "Query cancelled. How can I help you?",
+                  sender: 'bot',
+                  time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                };
+                setMessages(prev => [...prev, cancelMsg]);
+              }}
+              title="Cancel"
+            >
+              <FaTimes />
+            </button>
+          )}
+          {isCollectingQuery ? (
+            <textarea
+              placeholder="Your Name (Shift+Enter)&#10;your@email.com (Shift+Enter)&#10;1234567890"
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSendMessage();
+                }
+              }}
+              rows={3}
+            />
+          ) : (
+            <input
+              type="text"
+              placeholder="Type your message..."
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
+              onKeyPress={handleKeyPress}
+            />
+          )}
           <button 
             className="send-btn" 
             onClick={handleSendMessage}
             disabled={inputMessage.trim() === ''}
+            title="Send"
           >
             <FaPaperPlane />
           </button>
