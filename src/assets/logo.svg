@@ -1,0 +1,22 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main leaf/tech shape -->
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f97316"/>
+      <stop offset="100%" style="stop-color:#ea580c"/>
+    </linearGradient>
+    <linearGradient id="logoGradientDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c2410c"/>
+      <stop offset="100%" style="stop-color:#9a3412"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Main swift bird/arrow shape representing speed and technology -->
+  <path d="M30 60 C30 40, 50 25, 75 25 C85 25, 92 30, 95 35 L70 55 L95 50 C98 55, 98 65, 95 70 L45 85 C35 88, 28 80, 30 70 Z" fill="url(#logoGradient)"/>
+  
+  <!-- Wing detail -->
+  <path d="M40 55 C45 45, 60 38, 80 35 L65 55 L85 52 C82 58, 75 62, 65 65 L40 75 C35 70, 38 60, 40 55 Z" fill="url(#logoGradientDark)"/>
+  
+  <!-- Small accent dot -->
+  <circle cx="85" cy="42" r="3" fill="#9a3412"/>
+</svg>

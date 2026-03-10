@@ -237,8 +237,8 @@ const Contact = () => {
             {/* Contact Form */}
             <div className="contact-form-wrapper">
               <div className="form-header">
-                <h2>Send Us a Message</h2>
-                <p>Fill out the form and we'll get back to you within 24 hours</p>
+                <h2>Get In Touch With Us</h2>
+                <p>We'd love to hear from you. Submit your enquiry and our team will respond within 24 hours.</p>
               </div>
             
             <form className="contact-form" onSubmit={handleSubmit}>
@@ -404,43 +404,20 @@ const Contact = () => {
                 </div>
               </div>
 
-              <div className="info-card">
-                {/* <div className="info-icon">
-                  <FaClock />
-                </div> */}
-                {/* <div className="info-card-content">
-                  <h3>Working Hours</h3>
-                  <p>Monday - Saturday<br />9:00 AM - 6:00 PM</p>
-                </div> */}
-                {/* <div className="social-connect"> */}
-              <h3>Connect With Us</h3>
-              <div className="social-icons">
-                <a href="#" className="social-icon" aria-label="Facebook">
-                  <FaFacebookF />
-                </a>
-                <a href="#" className="social-icon" aria-label="LinkedIn">
-                  <FaLinkedinIn />
-                </a>
-                <a href="#" className="social-icon" aria-label="Instagram">
-                  <FaInstagram />
-                </a>
-              {/* </div> */}
+              <div className="info-card social-card">
+                <h3>Connect With Us</h3>
+                <div className="social-icons">
+                  <a href="#" className="social-icon" aria-label="Facebook">
+                    <FaFacebookF />
+                  </a>
+                  <a href="#" className="social-icon" aria-label="LinkedIn">
+                    <FaLinkedinIn />
+                  </a>
+                  <a href="#" className="social-icon" aria-label="Instagram">
+                    <FaInstagram />
+                  </a>
+                </div>
               </div>
-            </div>
-
-            {/* <div className="social-connect">
-              <h3>Connect With Us</h3>
-              <div className="social-icons">
-                <a href="#" className="social-icon" aria-label="Facebook">
-                  <FaFacebookF />
-                </a>
-                <a href="#" className="social-icon" aria-label="LinkedIn">
-                  <FaLinkedinIn />
-                </a>
-                <a href="#" className="social-icon" aria-label="Instagram">
-                  <FaInstagram />
-                </a>
-              </div> */}
             </div>
           </div>
           </div>
