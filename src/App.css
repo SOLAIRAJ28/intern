@@ -24,22 +24,22 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #9a3412 0%, #f97316 100%);
+  background: linear-gradient(135deg, #9d174d 0%, #ec4899 100%);
   border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #c2410c 0%, #ea580c 100%);
+  background: linear-gradient(135deg, #be185d 0%, #e83570 100%);
 }
 
 /* Selection */
 ::selection {
-  background: #9a3412;
+  background: #9d174d;
   color: white;
 }
 
 ::-moz-selection {
-  background: #9a3412;
+  background: #9d174d;
   color: white;
 }
 

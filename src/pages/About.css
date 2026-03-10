@@ -16,7 +16,7 @@
 
 .header-badge {
   display: inline-block;
-  background: linear-gradient(135deg, #ea580c 0%, #fb923c 100%);
+  background: linear-gradient(135deg, #e83570 0%, #f472b6 100%);
   color: white;
   padding: 8px 20px;
   border-radius: 25px;
@@ -25,7 +25,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 15px;
-  box-shadow: 0 4px 15px rgba(234, 88, 12, 0.3);
+  box-shadow: 0 4px 15px rgba(232, 53, 112, 0.3);
 }
 
 .section-header h1 {
@@ -33,7 +33,7 @@
   font-weight: 800;
   color: #1e293b;
   margin-bottom: 15px;
-  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+  background: linear-gradient(135deg, #e83570 0%, #be185d 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -74,7 +74,7 @@
 }
 
 .about-text strong {
-  color: #ea580c;
+  color: #e83570;
   font-weight: 600;
 }
 
@@ -87,12 +87,12 @@
 .image-placeholder {
   width: 350px;
   height: 350px;
-  background: linear-gradient(135deg, #ea580c 0%, #fb923c 100%);
+  background: linear-gradient(135deg, #e83570 0%, #f472b6 100%);
   border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 25px 60px rgba(234, 88, 12, 0.3);
+  box-shadow: 0 25px 60px rgba(232, 53, 112, 0.3);
   animation: float 3s ease-in-out infinite;
 }
 
@@ -114,7 +114,7 @@
 /* Vision Section */
 .vision-section {
   padding: 80px 50px;
-  background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+  background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
   color: #1e293b;
   text-align: center;
 }
@@ -140,7 +140,7 @@
 
 .section-icon {
   font-size: 3rem;
-  background: linear-gradient(135deg, #ea580c 0%, #fb923c 100%);
+  background: linear-gradient(135deg, #e83570 0%, #f472b6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -185,7 +185,7 @@
 }
 
 .mission-icon-wrapper .section-icon {
-  background: linear-gradient(135deg, #ea580c 0%, #fb923c 100%);
+  background: linear-gradient(135deg, #e83570 0%, #f472b6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -225,7 +225,7 @@
 .value-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-  border-color: #ea580c;
+  border-color: #e83570;
   background: white;
 }
 
@@ -233,7 +233,7 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #ea580c 0%, #fb923c 100%);
+  background: linear-gradient(135deg, #e83570 0%, #f472b6 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -261,7 +261,7 @@
 /* Difference Section */
 .difference-section {
   padding: 80px 50px;
-  background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+  background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
   color: #1e293b;
 }
 
@@ -293,14 +293,14 @@
 .difference-item:hover {
   background: rgba(255, 255, 255, 0.95);
   transform: translateY(-10px);
-  border-color: #ea580c;
-  box-shadow: 0 15px 30px rgba(234, 88, 12, 0.2);
+  border-color: #e83570;
+  box-shadow: 0 15px 30px rgba(232, 53, 112, 0.2);
 }
 
 .difference-number {
   font-size: 3rem;
   font-weight: 800;
-  color: rgba(234, 88, 12, 0.2);
+  color: rgba(232, 53, 112, 0.2);
   margin-bottom: 20px;
 }
 
