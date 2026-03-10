@@ -361,7 +361,7 @@ const ProgramDetail = () => {
             <h3>Ready to Start Your Learning Journey?</h3>
             <p>Join thousands of students who have transformed their careers with our programs</p>
             <Link to="/contact" className="enroll-btn" style={{ background: program.color }}>
-              Enroll Now
+              Enquiry →
             </Link>
           </div>
         </div>

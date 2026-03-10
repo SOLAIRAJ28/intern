@@ -168,7 +168,7 @@ const Programs = () => {
           <h2>Ready to Start Your Learning Journey?</h2>
           <p>Join thousands of students who have transformed their careers with us</p>
           <Link to="/contact" className="cta-button">
-            Enroll Now <FaArrowRight />
+            Enquiry <FaArrowRight />
           </Link>
         </div>
       </section>
