@@ -140,7 +140,7 @@ const Home = () => {
               <h4>Learn</h4>
               <p>Master fundamentals</p>
             </div>
-            <div className="journey-arrow">→</div>
+            <div className="journey-arrow"></div>
             
             <div className="journey-step">
               <div className="step-icon">
@@ -149,7 +149,7 @@ const Home = () => {
               <h4>Practice</h4>
               <p>Hands-on coding</p>
             </div>
-            <div className="journey-arrow">→</div>
+            <div className="journey-arrow"></div>
             
             <div className="journey-step">
               <div className="step-icon">
@@ -158,7 +158,7 @@ const Home = () => {
               <h4>Build Projects</h4>
               <p>Real-world apps</p>
             </div>
-            <div className="journey-arrow">→</div>
+            <div className="journey-arrow"></div>
             
             <div className="journey-step">
               <div className="step-icon">
@@ -167,7 +167,7 @@ const Home = () => {
               <h4>Get Certified</h4>
               <p>Official recognition</p>
             </div>
-            <div className="journey-arrow">→</div>
+            <div className="journey-arrow"></div>
             
             <div className="journey-step">
               <div className="step-icon">
