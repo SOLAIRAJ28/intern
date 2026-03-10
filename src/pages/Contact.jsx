@@ -306,7 +306,7 @@ const Contact = () => {
                     onBlur={() => handleBlur('phone')}
                     placeholder="Enter phone number"
                     disabled={loading}
-                    maxLength={15}
+                    maxLength={10}
                   />
                 </div>
                 {touched.phone && fieldErrors.phone && (
@@ -405,17 +405,14 @@ const Contact = () => {
               </div>
 
               <div className="info-card">
-                <div className="info-icon">
+                {/* <div className="info-icon">
                   <FaClock />
-                </div>
-                <div className="info-card-content">
+                </div> */}
+                {/* <div className="info-card-content">
                   <h3>Working Hours</h3>
                   <p>Monday - Saturday<br />9:00 AM - 6:00 PM</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="social-connect">
+                </div> */}
+                {/* <div className="social-connect"> */}
               <h3>Connect With Us</h3>
               <div className="social-icons">
                 <a href="#" className="social-icon" aria-label="Facebook">
@@ -427,7 +424,23 @@ const Contact = () => {
                 <a href="#" className="social-icon" aria-label="Instagram">
                   <FaInstagram />
                 </a>
+              {/* </div> */}
               </div>
+            </div>
+
+            {/* <div className="social-connect">
+              <h3>Connect With Us</h3>
+              <div className="social-icons">
+                <a href="#" className="social-icon" aria-label="Facebook">
+                  <FaFacebookF />
+                </a>
+                <a href="#" className="social-icon" aria-label="LinkedIn">
+                  <FaLinkedinIn />
+                </a>
+                <a href="#" className="social-icon" aria-label="Instagram">
+                  <FaInstagram />
+                </a>
+              </div> */}
             </div>
           </div>
           </div>

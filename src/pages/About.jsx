@@ -1,10 +1,11 @@
 import { 
   FaLightbulb, 
-  FaBullseye, 
+  FaCompass, 
   FaUsers, 
   FaHandshake, 
   FaGraduationCap,
-  FaRocket
+  FaRocket,
+  FaBullseye
 } from 'react-icons/fa';
 import './About.css';
 
@@ -43,29 +44,32 @@ const About = () => {
         </div>
       </section>
 
-      {/* Vision Section */}
-      <section className="vision-section">
-        <div className="vision-container">
-          <div className="vision-icon-wrapper">
-            <FaLightbulb className="section-icon" />
+      {/* Vision & Mission Section - Side by Side */}
+      <section className="vision-mission-wrapper">
+        {/* Vision Section */}
+        <div className="vision-section">
+          <div className="vision-container">
+            <div className="vision-icon-wrapper">
+              <FaLightbulb className="section-icon" />
+            </div>
+            <h2>Our Vision</h2>
+            <p className="vision-content">
+              Imagine a world where every individual's potential shines brilliantly. At Shanruck, we envision being the guiding light, offering personalized help and tools that empower individuals and reassure parents. Our goal is to make career exploration a positive journey that is clear, accessible, and full of opportunities.
+            </p>
           </div>
-          <h2>Our Vision</h2>
-          <p className="vision-content">
-            Imagine a world where every individual's potential shines brilliantly. At Shanruck, we envision being the guiding light, offering personalized help and tools that empower individuals and reassure parents. Our goal is to make career exploration a positive journey that is clear, accessible, and full of opportunities.
-          </p>
         </div>
-      </section>
 
-      {/* Mission Section */}
-      <section className="mission-section">
-        <div className="mission-container">
-          <div className="mission-icon-wrapper">
-            <FaBullseye className="section-icon" />
+        {/* Mission Section */}
+        <div className="mission-section">
+          <div className="mission-container">
+            <div className="mission-icon-wrapper">
+              <FaCompass className="section-icon" />
+            </div>
+            <h2>Our Mission</h2>
+            <p className="mission-content">
+              We are committed to provide comprehensive career support services that fulfills to the unique  needs  of  each  individual.  Through  personalized  counseling,  multidimensional testing, and access to resources, we aim to empower individuals to make informed decisions about their future careers. Our mission is to support individuals in knowing their full potential and embarking on fulfilling career paths.
+            </p>
           </div>
-          <h2>Our Mission</h2>
-          <p className="mission-content">
-            We are committed to provide comprehensive career support services that fulfills to the unique  needs  of  each  individual.  Through  personalized  counseling,  multidimensional testing, and access to resources, we aim to empower individuals to make informed decisions about their future careers. Our mission is to support individuals in knowing their full potential and embarking on fulfilling career paths.
-          </p>
         </div>
       </section>
 
@@ -117,7 +121,12 @@ const About = () => {
 
       {/* What Sets Us Apart */}
       <section className="difference-section">
-        <h2>Our Core Values</h2>
+        <div className="values-header">
+          <div className="values-icon-wrapper">
+            <FaBullseye className="section-icon" />
+          </div>
+          <h2>Our Core Values</h2>
+        </div>
         <div className="difference-container">
           <div className="difference-item">
             <div className="difference-number">01</div>
@@ -135,16 +144,16 @@ const About = () => {
             </p>
           </div>
 
-          <div className="difference-item">
+          {/* <div className="difference-item">
             <div className="difference-number">03</div>
             <h3>Integrity</h3>
             <p>
                 We maintain the highest standards of honesty and transparency in everything we do.
               </p>
-          </div>
+          </div> */}
 
           <div className="difference-item">
-            <div className="difference-number">04</div>
+            <div className="difference-number">03</div>
             <h3>Excellence</h3>
             <p>
               We are committed to delivering top-quality education and exceptional learning experiences.

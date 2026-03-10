@@ -86,12 +86,12 @@ const Programs = () => {
         <div className="programs-container">
           {/* Section Header */}
           <div className="section-header">
-            <div className="header-badge">Our Courses</div>
+            {/* <div className="header-badge">Our Courses</div> */}
             <h1>Training Programs</h1>
             <p>All our programs include hands-on projects, expert mentorship, certification, and placement assistance</p>
-            <Link to="/contact" className="header-cta-btn">
-              Get Started <FaArrowRight />
-            </Link>
+            {/* <Link to="/contact" className="header-cta-btn">
+              {/* Get Started <FaArrowRight /> */}
+            {/* </Link> } */}
           </div>
           
           <div className="programs-grid">
@@ -111,7 +111,7 @@ const Programs = () => {
                   <div className="program-level">{program.level}</div>
                 </div>
 
-                <Link to="/contact" className="learn-more-btn">
+                <Link to={`/program/${program.id}`} className="learn-more-btn">
                   Learn More <FaArrowRight />
                 </Link>
               </div>
