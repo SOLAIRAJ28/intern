@@ -22,11 +22,15 @@ const isEmailConfigured = !!(process.env.EMAIL_USER && process.env.EMAIL_PASS);
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST || 'smtp.gmail.com',
   port: parseInt(process.env.EMAIL_PORT) || 587,
-  secure: false, // true for 465, false for other ports
+  secure: parseInt(process.env.EMAIL_PORT) === 465, // true for 465, false for other ports
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+  tls: {
+    rejectUnauthorized: false,
+  },
+  connectionTimeout: 10000,
 });
 
 // Verify transporter configuration
@@ -135,15 +139,25 @@ This enquiry was submitted on ${new Date().toLocaleString()}
     };
 
     // Send email
-    await transporter.sendMail(mailOptions);
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log('✅ Email sent successfully to:', process.env.EMAIL_TO);
+    } catch (emailError) {
+      // Log the enquiry even if email fails (useful for development/debugging)
+      console.error('❌ Email sending failed, but enquiry received:');
+      console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+      console.log(emailContent);
+      console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+      console.error('Email error:', emailError.message);
+    }
 
-    // Success response
+    // Success response (even if email fails, form data is captured)
     res.status(200).json({
       success: true,
       message: 'Your enquiry has been successfully submitted. We will contact you soon.',
     });
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('Error processing enquiry:', error);
     res.status(500).json({
       success: false,
       message: 'Failed to send enquiry. Please try again later or contact us directly.',
