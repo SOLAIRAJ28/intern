@@ -42,7 +42,7 @@
 }
 
 .navbar-logo:hover {
-  color: #d4166a;
+  color: #ea580c;
   transform: scale(1.05);
 }
 
@@ -75,8 +75,8 @@
 
 .nav-links:hover,
 .nav-links.active {
-  color: #d4166a;
-  border-bottom: 3px solid #d4166a;
+  color: #ea580c;
+  border-bottom: 3px solid #ea580c;
   transition: all 0.3s ease;
 }
 
@@ -125,7 +125,7 @@
 
   .nav-links:hover,
   .nav-links.active {
-    background: #fdf0f7;
+    background: #fff7ed;
     border-bottom: none;
   }
 

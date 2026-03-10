@@ -52,7 +52,7 @@ const Home = () => {
           <div className="orbit-container">
             {/* Outer orbit */}
             <div className="orbit orbit-outer">
-              <div className="orbit-icon icon-1" style={{ '--icon-bg': '#fed7aa', '--icon-color': '#d4166a' }}>
+              <div className="orbit-icon icon-1" style={{ '--icon-bg': '#fed7aa', '--icon-color': '#ea580c' }}>
                 <FaLaptopCode />
               </div>
               <div className="orbit-icon icon-2" style={{ '--icon-bg': '#fef3c7', '--icon-color': '#d97706' }}>
@@ -64,7 +64,7 @@ const Home = () => {
               <div className="orbit-icon icon-4" style={{ '--icon-bg': '#fce7f3', '--icon-color': '#db2777' }}>
                 <FaBriefcase />
               </div>
-              <div className="orbit-icon icon-5" style={{ '--icon-bg': '#ffedd5', '--icon-color': '#a0104f' }}>
+              <div className="orbit-icon icon-5" style={{ '--icon-bg': '#ffedd5', '--icon-color': '#c2410c' }}>
                 <FaCube />
               </div>
               <div className="orbit-icon icon-6" style={{ '--icon-bg': '#fff7ed', '--icon-color': '#9a3412' }}>

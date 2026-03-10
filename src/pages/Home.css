@@ -5,7 +5,7 @@
 /* Hero Section */
 .hero {
   min-height: 90vh;
-  background: linear-gradient(135deg, #ffffff 0%, #fdf0f7 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #fff7ed 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,7 +55,7 @@
 }
 
 .hero-title .highlight {
-  color: #d4166a;
+  color: #ea580c;
 }
 
 .hero-features {
@@ -73,7 +73,7 @@
 }
 
 .divider {
-  color: #d4166a;
+  color: #ea580c;
   font-weight: 700;
 }
 
@@ -98,13 +98,13 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #f97316 0%, #d4166a 100%);
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
   color: #fff;
   border-color: transparent;
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #d4166a 0%, #a0104f 100%);
+  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
   color: #fff;
   border-color: transparent;
   transform: translateY(-5px);
@@ -114,14 +114,14 @@
 .btn-secondary {
   background: transparent;
   color: #1e293b;
-  border: 2px solid #d4166a;
+  border: 2px solid #ea580c;
 }
 
 .btn-secondary:hover {
-  background: #d4166a;
+  background: #ea580c;
   color: #fff;
   transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(212, 22, 106, 0.3);
+  box-shadow: 0 15px 30px rgba(234, 88, 12, 0.3);
 }
 
 /* Hero Image/Illustration */
@@ -147,7 +147,7 @@
 /* Orbit circles */
 .orbit {
   position: absolute;
-  border: 2px solid rgba(212, 22, 106, 0.3);
+  border: 2px solid rgba(234, 88, 12, 0.3);
   border-radius: 50%;
   animation: spin 30s linear infinite;
 }
@@ -182,7 +182,7 @@
 
 .orbit-icon svg {
   font-size: 1.4rem;
-  color: var(--icon-color, #d4166a);
+  color: var(--icon-color, #ea580c);
 }
 
 /* Position icons on outer orbit (6 icons, 60 degrees apart) */
@@ -210,7 +210,7 @@
 
 .orbit-icon-inner svg {
   font-size: 1.2rem;
-  color: var(--icon-color, #d4166a);
+  color: var(--icon-color, #ea580c);
 }
 
 /* Position icons on inner orbit (4 icons, 90 degrees apart) */
@@ -223,13 +223,13 @@
 .orbit-center {
   width: 130px;
   height: 130px;
-  background: linear-gradient(135deg, #ffffff 0%, #fdf0f7 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #fff7ed 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 0 15px rgba(212, 22, 106, 0.1), 
-              0 0 0 30px rgba(212, 22, 106, 0.05),
+  box-shadow: 0 0 0 15px rgba(234, 88, 12, 0.1), 
+              0 0 0 30px rgba(234, 88, 12, 0.05),
               0 15px 40px rgba(0, 0, 0, 0.15);
   z-index: 10;
   position: relative;
@@ -278,7 +278,7 @@
 
 .floating-card .card-icon {
   font-size: 2.5rem;
-  background: linear-gradient(135deg, #7b0d3b 0%, #f97316 100%);
+  background: linear-gradient(135deg, #9a3412 0%, #f97316 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -350,13 +350,13 @@
 
 .stat-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(212, 22, 106, 0.25);
-  border-color: #d4166a;
+  box-shadow: 0 20px 40px rgba(234, 88, 12, 0.25);
+  border-color: #ea580c;
 }
 
 .stat-icon {
   font-size: 3rem;
-  background: linear-gradient(135deg, #d4166a 0%, #f04d96 100%);
+  background: linear-gradient(135deg, #ea580c 0%, #fb923c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -379,7 +379,7 @@
 /* Highlight Section */
 .highlight-section {
   padding: 80px 50px;
-  background: linear-gradient(135deg, #fdf0f7 0%, #fce4f0 100%);
+  background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
   color: #1e293b;
 }
 
@@ -443,7 +443,7 @@
 
 .step-icon svg {
   font-size: 4rem;
-  background: linear-gradient(135deg, #d4166a 0%, #f04d96 100%);
+  background: linear-gradient(135deg, #ea580c 0%, #fb923c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -470,7 +470,7 @@
 .journey-arrow {
   font-size: 2rem;
   font-weight: bold;
-  color: #d4166a;
+  color: #ea580c;
   animation: pulse 2s ease-in-out infinite;
 }
 
@@ -519,15 +519,15 @@
 
 .feature-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(212, 22, 106, 0.25);
-  border-color: #d4166a;
+  box-shadow: 0 20px 40px rgba(234, 88, 12, 0.25);
+  border-color: #ea580c;
 }
 
 .feature-icon {
   width: 70px;
   height: 70px;
   border-radius: 20px;
-  background: linear-gradient(135deg, #d4166a 0%, #f04d96 100%);
+  background: linear-gradient(135deg, #ea580c 0%, #fb923c 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -684,8 +684,8 @@
   .orbit-center {
     width: 90px;
     height: 90px;
-    box-shadow: 0 0 0 10px rgba(212, 22, 106, 0.1), 
-                0 0 0 20px rgba(212, 22, 106, 0.05),
+    box-shadow: 0 0 0 10px rgba(234, 88, 12, 0.1), 
+                0 0 0 20px rgba(234, 88, 12, 0.05),
                 0 10px 30px rgba(0, 0, 0, 0.15);
   }
   
