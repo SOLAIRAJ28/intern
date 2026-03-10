@@ -23,7 +23,7 @@
 .program-hero {
   background: white;
   padding: 80px 50px 60px;
-  border-top: 5px solid #ea580c;
+  border-top: 5px solid #e83570;
 }
 
 .hero-content {
@@ -49,8 +49,8 @@
 
 .back-button:hover {
   background: #f8f9fa;
-  border-color: #ea580c;
-  color: #ea580c;
+  border-color: #e83570;
+  color: #e83570;
 }
 
 .hero-header {
@@ -106,7 +106,7 @@
 
 .meta-item svg {
   font-size: 1.3rem;
-  color: #ea580c;
+  color: #e83570;
 }
 
 /* Modules Section */
@@ -150,8 +150,8 @@
 
 .module-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(234, 88, 12, 0.15);
-  border-color: #ea580c;
+  box-shadow: 0 8px 30px rgba(232, 53, 112, 0.15);
+  border-color: #e83570;
 }
 
 .module-header {
@@ -208,10 +208,10 @@
 .program-cta {
   margin-top: 80px;
   text-align: center;
-  background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+  background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
   padding: 60px 40px;
   border-radius: 20px;
-  border: 3px solid #ea580c;
+  border: 3px solid #e83570;
 }
 
 .program-cta h3 {
@@ -230,19 +230,19 @@
 .enroll-btn {
   display: inline-block;
   padding: 16px 40px;
-  background: #ea580c;
+  background: #e83570;
   color: white;
   text-decoration: none;
   border-radius: 10px;
   font-size: 1.1rem;
   font-weight: 600;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 20px rgba(234, 88, 12, 0.3);
+  box-shadow: 0 8px 20px rgba(232, 53, 112, 0.3);
 }
 
 .enroll-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(234, 88, 12, 0.4);
+  box-shadow: 0 12px 30px rgba(232, 53, 112, 0.4);
 }
 
 .back-btn {
@@ -250,7 +250,7 @@
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background: #ea580c;
+  background: #e83570;
   color: white;
   text-decoration: none;
   border-radius: 8px;
@@ -259,7 +259,7 @@
 }
 
 .back-btn:hover {
-  background: #fb923c;
+  background: #f472b6;
   transform: translateY(-2px);
 }
 
