@@ -116,33 +116,6 @@ const Learners = () => {
 
   return (
     <div className="learners">
-      {/* Stats Section */}
-      <section className="learners-stats">
-        <div className="section-header">
-          <div className="header-badge">Our Impact</div>
-          <h1>Our Learners</h1>
-          <p>Hear from students who have transformed their careers with us</p>
-        </div>
-        <div className="stats-grid">
-          <div className="stat-item">
-            <h3>500+</h3>
-            <p>Students Trained</p>
-          </div>
-          <div className="stat-item">
-            <h3>85%</h3>
-            <p>Placement Rate</p>
-          </div>
-          <div className="stat-item">
-            <h3>4.9/5</h3>
-            <p>Average Rating</p>
-          </div>
-          <div className="stat-item">
-            <h3>50+</h3>
-            <p>Partner Companies</p>
-          </div>
-        </div>
-      </section>
-
       {/* Testimonials Section */}
       <section className="testimonials-section">
         <div className="testimonials-container">
