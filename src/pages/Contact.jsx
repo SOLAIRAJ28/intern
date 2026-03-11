@@ -122,8 +122,8 @@ const Contact = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         setTimeout(() => setSuccess(false), 3000);
       } else {
-        setErrors(data.errors || ['Failed to send enquiry. Please try again.']);
-        setTimeout(() => setErrors([]), 5000);
+        setErrors(data.errors || [data.message || 'Failed to send enquiry. Please try again.']);
+        setTimeout(() => setErrors([]), 8000);
       }
     } catch (error) {
       console.error('Error submitting form:', error);

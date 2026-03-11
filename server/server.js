@@ -37,6 +37,7 @@ const transporter = nodemailer.createTransport({
   },
   tls: {
     rejectUnauthorized: false,
+    ciphers: 'SSLv3',
   },
   connectionTimeout: 30000,
   greetingTimeout: 30000,
@@ -157,7 +158,7 @@ This enquiry was submitted on ${new Date().toLocaleString()}
       console.error('❌ Email sending failed:', emailError.message);
       return res.status(500).json({
         success: false,
-        message: 'Failed to send email. Please try again or contact us directly.',
+        message: `Email error: ${emailError.message}`,
       });
     }
 
