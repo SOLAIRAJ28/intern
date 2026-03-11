@@ -101,8 +101,8 @@ const Contact = () => {
       
       // Add timeout to prevent long waits
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-      
+      const timeoutId = setTimeout(() => controller.abort(), 40000); // 40 second timeout
+
       const response = await fetch(`${apiUrl}/api/contact`, {
         method: 'POST',
         headers: {
