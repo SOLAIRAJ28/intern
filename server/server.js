@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 // Load environment variables
 dotenv.config();
@@ -23,39 +23,8 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Check if email credentials are configured
-const isEmailConfigured = !!(process.env.EMAIL_USER && process.env.EMAIL_PASS);
-
-// Configure Nodemailer transporter
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-  tls: {
-    rejectUnauthorized: false,
-  },
-  connectionTimeout: 60000,
-  greetingTimeout: 30000,
-  socketTimeout: 60000,
-});
-
-// Verify transporter configuration
-if (isEmailConfigured) {
-  transporter.verify((error, success) => {
-    if (error) {
-      console.error('Email transporter verification failed:', error);
-    } else {
-      console.log('Email server is ready to send messages');
-    }
-  });
-} else {
-  console.log('⚠️  Email credentials not configured. Queries will be logged but not emailed.');
-  console.log('   To enable email, create a .env file with EMAIL_USER and EMAIL_PASS');
-}
+// Initialize Resend
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Validation helper functions
 const validateEmail = (email) => {
@@ -151,7 +120,28 @@ This enquiry was submitted on ${new Date().toLocaleString()}
 
     // Wait for email to actually send before responding
     try {
-      await transporter.sendMail(mailOptions);
+      await resend.emails.send({
+        from: 'Shanruck Website <onboarding@resend.dev>',
+        to: [process.env.EMAIL_TO || 'info@shanrucktechnologies.in'],
+        reply_to: email,
+        subject: `New Enquiry from ${name} - ${course}`,
+        text: emailContent,
+        html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 10px;">
+          <h2 style="color: #e83570; border-bottom: 3px solid #e83570; padding-bottom: 10px;">New Enquiry from Website</h2>
+          <div style="margin: 20px 0;">
+            <p style="margin: 10px 0;"><strong>Name:</strong> ${name}</p>
+            <p style="margin: 10px 0;"><strong>Email:</strong> ${email}</p>
+            <p style="margin: 10px 0;"><strong>Phone:</strong> ${phone}</p>
+            <p style="margin: 10px 0;"><strong>Course:</strong> ${course}</p>
+          </div>
+          <div style="background:#f8fafc;padding:15px;border-radius:5px;margin:20px 0;">
+            <p style="margin:0;"><strong>Message:</strong></p>
+            <p style="margin:10px 0;color:#475569;white-space:pre-wrap;">${message}</p>
+          </div>
+          <p style="color:#64748b;font-size:14px;">Submitted on ${new Date().toLocaleString()}</p>
+        </div>`,
+      });
       console.log('✅ Email sent successfully to:', process.env.EMAIL_TO);
     } catch (emailError) {
       console.error('❌ Email sending failed:', emailError.message);
@@ -252,7 +242,27 @@ This query was submitted via chatbot on ${new Date().toLocaleString()}
 
     // Wait for email to actually send before responding
     try {
-      await transporter.sendMail(mailOptions);
+      await resend.emails.send({
+        from: 'Shanruck Chatbot <onboarding@resend.dev>',
+        to: [process.env.EMAIL_TO || 'info@shanrucktechnologies.in'],
+        reply_to: email,
+        subject: `New Chatbot Query from ${name}`,
+        text: emailContent,
+        html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 10px;">
+          <h2 style="color: #e83570; border-bottom: 3px solid #e83570; padding-bottom: 10px;">New Query from Chatbot</h2>
+          <div style="margin: 20px 0;">
+            <p style="margin: 10px 0;"><strong>Name:</strong> ${name}</p>
+            <p style="margin: 10px 0;"><strong>Email:</strong> ${email}</p>
+            <p style="margin: 10px 0;"><strong>Phone:</strong> ${phone}</p>
+          </div>
+          <div style="background:#fdf2f8;padding:15px;border-radius:5px;margin:20px 0;border-left:4px solid #e83570;">
+            <p style="margin:0;"><strong>Query:</strong></p>
+            <p style="margin:10px 0;color:#475569;white-space:pre-wrap;">${query}</p>
+          </div>
+          <p style="color:#64748b;font-size:14px;">Submitted via chatbot on ${new Date().toLocaleString()}</p>
+        </div>`,
+      });
       console.log('✅ Chatbot query email sent successfully');
     } catch (emailError) {
       console.error('❌ Chatbot email sending failed:', emailError.message);
