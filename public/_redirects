@@ -1,4 +1,1 @@
-# Public folder redirect rules for Render/Netlify
-# This ensures React Router works correctly with client-side routing
-
-/*    /index.html   200
+/* /index.html 200
