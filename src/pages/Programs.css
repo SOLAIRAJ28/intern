@@ -88,6 +88,7 @@
   border: 2px solid transparent;
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 
 .program-card:hover {
@@ -126,11 +127,12 @@
 }
 
 .program-description {
-  color: #334155;
+  color: #1e293b;
   line-height: 1.7;
   margin-bottom: 25px;
   font-size: 1.05rem;
   flex-grow: 1;
+  text-align: left;
 }
 
 .program-info {
@@ -214,6 +216,7 @@
   position: relative;
   overflow: hidden;
   border: 2px solid #e2e8f0;
+  text-align: left;
 }
 
 .benefit-item::before {
@@ -258,11 +261,11 @@
 
 .benefit-item p {
   line-height: 1.7;
-  opacity: 0.98;
   font-size: 1.05rem;
   position: relative;
   z-index: 1;
-  color: #475569;
+  color: #1e293b;
+  text-align: left;
 }
 
 /* CTA Section */

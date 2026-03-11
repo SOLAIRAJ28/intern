@@ -27,16 +27,24 @@ const Home = () => {
         <div className="hero-content">
           <div className="hero-text">
             <h1 className="hero-title">
-              Ignite passion. <span className="highlight">Empower</span> skills. Build <span className="highlight">careers</span>.
+              Ignite passion.<br />
+              <span className="highlight">Empower</span> skills. Build<br />
+              <span className="highlight">careers</span>.
             </h1>
             <div className="hero-features">
-              <span className="feature">Training Programs</span>
-              <span className="divider">•</span>
-              <span className="feature">Certification Programs</span>
-              <span className="divider">•</span>
-              <span className="feature">Placement Support</span>
-              <span className="divider">•</span>
-              <span className="feature">Career Development</span>
+              <div className="hero-features-row">
+                <span className="feat-dot">•</span>
+                <span className="feature-item">Training Programs</span>
+                <span className="feat-dot">•</span>
+                <span className="feature-item">Certification Programs</span>
+                <span className="feat-dot">•</span>
+                <span className="feature-item">Placement Support</span>
+                
+              </div>
+              <div className="hero-features-row">
+                <span className="feat-dot">•</span>
+                <span className="feature-item">Career Development</span>
+              </div>
             </div>
             <div className="hero-buttons">
               <Link to="/programs" className="btn btn-primary">

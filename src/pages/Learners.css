@@ -179,6 +179,7 @@
   display: flex;
   flex-direction: column;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
 }
 
 .testimonial-card::before {
@@ -228,13 +229,14 @@
 
 .testimonial-text {
   font-family: 'Nunito', sans-serif;
-  color: #334155;
+  color: #1e293b;
   line-height: 1.85;
   font-size: 1.05rem;
   margin-bottom: 25px;
   font-style: italic;
   font-weight: 500;
   flex: 1;
+  text-align: left;
 }
 
 .testimonial-footer {

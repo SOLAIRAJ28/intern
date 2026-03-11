@@ -69,8 +69,9 @@
 .about-text p {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #334155;
+  color: #1e293b;
   margin-bottom: 18px;
+  text-align: left;
 }
 
 .about-text strong {
@@ -136,8 +137,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   position: relative;
   transition: all 0.3s ease;
   border: 3px solid #e11d48;
@@ -181,7 +182,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 30px;
+  margin: 0 0 30px 0;
   box-shadow: 0 8px 25px rgba(225, 29, 72, 0.2);
   border: 3px solid #e2e8f0;
   position: relative;
@@ -214,17 +215,20 @@
   letter-spacing: -0.5px;
   position: relative;
   z-index: 1;
+  text-align: left;
+  width: 100%;
 }
 
 .vision-content,
 .mission-content {
   font-size: 1.05rem;
   line-height: 1.8;
-  color: #64748b;
-  text-align: center;
+  color: #1e293b;
+  text-align: left;
   font-weight: 400;
   position: relative;
   z-index: 1;
+  width: 100%;
 }
 
 /* Mission Section */
@@ -241,8 +245,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   position: relative;
   transition: all 0.3s ease;
   border: 3px solid #e11d48;
@@ -282,7 +286,8 @@
 }
 
 .mission-content {
-  color: #64748b;
+  color: #1e293b;
+  text-align: left;
 }
 
 /* Values Section */
@@ -421,6 +426,7 @@
   border: 2px solid #e2e8f0;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  text-align: left;
 }
 
 .difference-item:hover {
@@ -468,9 +474,9 @@
 
 .difference-item p {
   line-height: 1.7;
-  opacity: 0.95;
   font-size: 1.05rem;
-  color: #475569;
+  color: #1e293b;
+  text-align: left;
 }
 
 /* Responsive Design */
