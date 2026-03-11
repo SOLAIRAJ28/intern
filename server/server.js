@@ -38,11 +38,9 @@ const transporter = nodemailer.createTransport({
   tls: {
     rejectUnauthorized: false,
   },
-  connectionTimeout: 5000, // Reduced from 10s to 5s
-  greetingTimeout: 3000,   // 3s for SMTP greeting
-  socketTimeout: 5000,     // 5s for socket operations
-  pool: true,              // Use connection pooling for faster subsequent sends
-  maxConnections: 5,       // Max 5 connections in pool
+  connectionTimeout: 30000,
+  greetingTimeout: 30000,
+  socketTimeout: 30000,
 });
 
 // Verify transporter configuration
@@ -123,16 +121,17 @@ This enquiry was submitted on ${new Date().toLocaleString()}
     const mailOptions = {
       from: `"Shanruck Website" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_TO || 'info@shanrucktechnologies.in',
-      subject: 'New Enquiry from Website',
+      replyTo: email,
+      subject: `New Enquiry from ${name} - ${course}`,
       text: emailContent,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 10px;">
-          <h2 style="color: #2563eb; border-bottom: 3px solid #2563eb; padding-bottom: 10px;">New Enquiry from Website</h2>
+          <h2 style="color: #e83570; border-bottom: 3px solid #e83570; padding-bottom: 10px;">New Enquiry from Website</h2>
           
           <div style="margin: 20px 0;">
             <p style="margin: 10px 0;"><strong style="color: #1e293b;">Name:</strong> ${name}</p>
-            <p style="margin: 10px 0;"><strong style="color: #1e293b;">Email:</strong> <a href="mailto:${email}" style="color: #2563eb;">${email}</a></p>
-            <p style="margin: 10px 0;"><strong style="color: #1e293b;">Phone:</strong> <a href="tel:${phone}" style="color: #2563eb;">${phone}</a></p>
+            <p style="margin: 10px 0;"><strong style="color: #1e293b;">Email:</strong> <a href="mailto:${email}" style="color: #e83570;">${email}</a></p>
+            <p style="margin: 10px 0;"><strong style="color: #1e293b;">Phone:</strong> <a href="tel:${phone}" style="color: #e83570;">${phone}</a></p>
             <p style="margin: 10px 0;"><strong style="color: #1e293b;">Course Interested:</strong> ${course}</p>
           </div>
           
@@ -150,22 +149,18 @@ This enquiry was submitted on ${new Date().toLocaleString()}
       `,
     };
 
-    // Send email
-    // Send email asynchronously (don't block response)
-    transporter.sendMail(mailOptions)
-      .then(() => {
-        console.log('✅ Email sent successfully to:', process.env.EMAIL_TO);
-      })
-      .catch((emailError) => {
-        // Log the enquiry even if email fails (useful for development/debugging)
-        console.error('❌ Email sending failed, but enquiry received:');
-        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        console.log(emailContent);
-        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        console.error('Email error:', emailError.message);
+    // Wait for email to actually send before responding
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log('✅ Email sent successfully to:', process.env.EMAIL_TO);
+    } catch (emailError) {
+      console.error('❌ Email sending failed:', emailError.message);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to send email. Please try again or contact us directly.',
       });
+    }
 
-    // Success response (immediate - don't wait for email)
     res.status(200).json({
       success: true,
       message: 'Your enquiry has been successfully submitted. We will contact you soon.',
@@ -228,19 +223,20 @@ This query was submitted via chatbot on ${new Date().toLocaleString()}
     const mailOptions = {
       from: `"Shanruck Chatbot" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_TO || 'info@shanrucktechnologies.in',
-      subject: 'New Query from Chatbot',
+      replyTo: email,
+      subject: `New Chatbot Query from ${name}`,
       text: emailContent,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 10px;">
-          <h2 style="color: #10b981; border-bottom: 3px solid #10b981; padding-bottom: 10px;">🤖 New Query from Chatbot</h2>
+          <h2 style="color: #e83570; border-bottom: 3px solid #e83570; padding-bottom: 10px;">New Query from Chatbot</h2>
           
           <div style="margin: 20px 0;">
             <p style="margin: 10px 0;"><strong style="color: #1e293b;">Name:</strong> ${name}</p>
-            <p style="margin: 10px 0;"><strong style="color: #1e293b;">Email:</strong> <a href="mailto:${email}" style="color: #2563eb;">${email}</a></p>
-            <p style="margin: 10px 0;"><strong style="color: #1e293b;">Phone:</strong> <a href="tel:${phone}" style="color: #2563eb;">${phone}</a></p>
+            <p style="margin: 10px 0;"><strong style="color: #1e293b;">Email:</strong> <a href="mailto:${email}" style="color: #e83570;">${email}</a></p>
+            <p style="margin: 10px 0;"><strong style="color: #1e293b;">Phone:</strong> <a href="tel:${phone}" style="color: #e83570;">${phone}</a></p>
           </div>
           
-          <div style="background-color: #f0fdf4; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #10b981;">
+          <div style="background-color: #fdf2f8; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #e83570;">
             <p style="margin: 0;"><strong style="color: #1e293b;">Query:</strong></p>
             <p style="margin: 10px 0; color: #475569; white-space: pre-wrap;">${query}</p>
           </div>
@@ -254,27 +250,18 @@ This query was submitted via chatbot on ${new Date().toLocaleString()}
       `,
     };
 
-    // Send email if configured, otherwise just log
-    if (isEmailConfigured) {
-      // Send email asynchronously (don't block response)
-      transporter.sendMail(mailOptions)
-        .then(() => {
-          console.log('Chatbot query email sent successfully');
-        })
-        .catch((error) => {
-          console.error('Error sending chatbot query email:', error);
-        });
-    } else {
-      console.log('📝 New Chatbot Query Received (Email not configured):');
-      console.log('   Name:', name);
-      console.log('   Email:', email);
-      console.log('   Phone:', phone);
-      console.log('   Query:', query);
-      console.log('   Time:', new Date().toLocaleString());
-      console.log('---');
+    // Wait for email to actually send before responding
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log('✅ Chatbot query email sent successfully');
+    } catch (emailError) {
+      console.error('❌ Chatbot email sending failed:', emailError.message);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to submit query. Please try again or contact us directly.',
+      });
     }
 
-    // Success response (immediate - don't wait for email)
     res.status(200).json({
       success: true,
       message: 'Your query has been submitted successfully. Our team will contact you soon.',
