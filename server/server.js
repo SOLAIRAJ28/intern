@@ -30,7 +30,11 @@ const transporter = nodemailer.createTransport({
   tls: {
     rejectUnauthorized: false,
   },
-  connectionTimeout: 10000,
+  connectionTimeout: 5000, // Reduced from 10s to 5s
+  greetingTimeout: 3000,   // 3s for SMTP greeting
+  socketTimeout: 5000,     // 5s for socket operations
+  pool: true,              // Use connection pooling for faster subsequent sends
+  maxConnections: 5,       // Max 5 connections in pool
 });
 
 // Verify transporter configuration
@@ -139,19 +143,21 @@ This enquiry was submitted on ${new Date().toLocaleString()}
     };
 
     // Send email
-    try {
-      await transporter.sendMail(mailOptions);
-      console.log('✅ Email sent successfully to:', process.env.EMAIL_TO);
-    } catch (emailError) {
-      // Log the enquiry even if email fails (useful for development/debugging)
-      console.error('❌ Email sending failed, but enquiry received:');
-      console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-      console.log(emailContent);
-      console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-      console.error('Email error:', emailError.message);
-    }
+    // Send email asynchronously (don't block response)
+    transporter.sendMail(mailOptions)
+      .then(() => {
+        console.log('✅ Email sent successfully to:', process.env.EMAIL_TO);
+      })
+      .catch((emailError) => {
+        // Log the enquiry even if email fails (useful for development/debugging)
+        console.error('❌ Email sending failed, but enquiry received:');
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.log(emailContent);
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.error('Email error:', emailError.message);
+      });
 
-    // Success response (even if email fails, form data is captured)
+    // Success response (immediate - don't wait for email)
     res.status(200).json({
       success: true,
       message: 'Your enquiry has been successfully submitted. We will contact you soon.',
@@ -242,8 +248,14 @@ This query was submitted via chatbot on ${new Date().toLocaleString()}
 
     // Send email if configured, otherwise just log
     if (isEmailConfigured) {
-      await transporter.sendMail(mailOptions);
-      console.log('Chatbot query email sent successfully');
+      // Send email asynchronously (don't block response)
+      transporter.sendMail(mailOptions)
+        .then(() => {
+          console.log('Chatbot query email sent successfully');
+        })
+        .catch((error) => {
+          console.error('Error sending chatbot query email:', error);
+        });
     } else {
       console.log('📝 New Chatbot Query Received (Email not configured):');
       console.log('   Name:', name);
@@ -254,7 +266,7 @@ This query was submitted via chatbot on ${new Date().toLocaleString()}
       console.log('---');
     }
 
-    // Success response
+    // Success response (immediate - don't wait for email)
     res.status(200).json({
       success: true,
       message: 'Your query has been submitted successfully. Our team will contact you soon.',
