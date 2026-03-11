@@ -178,14 +178,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="highlight-buttons">
-            <Link to="/programs" className="btn btn-primary">
-              View Programs
-            </Link>
-            <Link to="/contact" className="btn btn-secondary">
-              Contact Us
-            </Link>
-          </div>
+          
         </div>
       </section>
 

@@ -166,7 +166,6 @@ const Contact = () => {
         <div className="contact-header-modern">
           <span className="badge">Get in Touch</span>
           <h1>Let's Connect & <span>Collaborate</span></h1>
-          <p>Ready to start your tech journey? Reach out to us and we'll help you find the perfect program.</p>
         </div>
 
         <div className="contact-card-modern">
