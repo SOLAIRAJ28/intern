@@ -237,8 +237,13 @@ const Chatbot = () => {
   // Submit query to server
   const submitQueryToServer = async (formData) => {
     setIsSubmittingQuery(true);
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    const apiUrl = 'https://shanruck-backend.onrender.com';
     try {
+      // Wake up backend first
+      try {
+        await fetch(`${apiUrl}/api/health`, { method: 'GET', mode: 'cors' });
+      } catch (_) { /* ignore */ }
+
       const response = await fetch(`${apiUrl}/api/chatbot-query`, {
         method: 'POST',
         headers: {

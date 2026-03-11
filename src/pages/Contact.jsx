@@ -97,8 +97,13 @@ const Contact = () => {
 
     setLoading(true);
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      
+      const apiUrl = 'https://shanruck-backend.onrender.com';
+
+      // Wake up the backend first (free tier sleeps after inactivity)
+      try {
+        await fetch(`${apiUrl}/api/health`, { method: 'GET', mode: 'cors' });
+      } catch (_) { /* ignore wake-up errors */ }
+
       // Add timeout to prevent long waits
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 90000); // 90 second timeout
@@ -128,9 +133,9 @@ const Contact = () => {
     } catch (error) {
       console.error('Error submitting form:', error);
       if (error.name === 'AbortError') {
-        setErrors(['Server is waking up, please try again in 30 seconds.']);
+        setErrors(['Server is still waking up. Please wait 10 seconds and try again.']);
       } else {
-        setErrors(['Network error. Please check your internet connection and try again.']);
+        setErrors(['Unable to reach server. Please try again in a moment.']);
       }
       setTimeout(() => setErrors([]), 8000);
     } finally {
