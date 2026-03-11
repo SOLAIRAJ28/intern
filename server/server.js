@@ -28,21 +28,11 @@ const isEmailConfigured = !!(process.env.EMAIL_USER && process.env.EMAIL_PASS);
 
 // Configure Nodemailer transporter
 const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST || 'smtpout.secureserver.net',
-  port: parseInt(process.env.EMAIL_PORT) || 587,
-  secure: false,
-  requireTLS: true,
+  service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-  tls: {
-    rejectUnauthorized: false,
-    minVersion: 'TLSv1',
-  },
-  connectionTimeout: 30000,
-  greetingTimeout: 30000,
-  socketTimeout: 30000,
 });
 
 // Verify transporter configuration
