@@ -101,7 +101,7 @@ const Contact = () => {
       
       // Add timeout to prevent long waits
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 40000); // 40 second timeout
+      const timeoutId = setTimeout(() => controller.abort(), 90000); // 90 second timeout
 
       const response = await fetch(`${apiUrl}/api/contact`, {
         method: 'POST',
@@ -128,11 +128,11 @@ const Contact = () => {
     } catch (error) {
       console.error('Error submitting form:', error);
       if (error.name === 'AbortError') {
-        setErrors(['Request timed out. Please check your internet connection and try again.']);
+        setErrors(['Server is waking up, please try again in 30 seconds.']);
       } else {
-        setErrors(['Network error. Please check if the server is running and try again.']);
+        setErrors(['Network error. Please check your internet connection and try again.']);
       }
-      setTimeout(() => setErrors([]), 5000);
+      setTimeout(() => setErrors([]), 8000);
     } finally {
       setLoading(false);
     }
@@ -308,7 +308,7 @@ const Contact = () => {
               </div>
 
               <button type="submit" className="submit-btn-modern" disabled={loading}>
-                {loading ? <><span className="spinner"></span> <span>Sending...</span></> : <><FaPaperPlane /> <span>Send Message</span></>}
+                {loading ? <><span className="spinner"></span> <span>Sending... (may take up to 60s)</span></> : <><FaPaperPlane /> <span>Send Message</span></>}
               </button>
             </form>
           </div>
