@@ -99,25 +99,28 @@ const Contact = () => {
     try {
       const apiUrl = 'https://shanruck-backend.onrender.com';
 
-      // Wake up the backend first (free tier sleeps after inactivity)
-      try {
-        await fetch(`${apiUrl}/api/health`, { method: 'GET', mode: 'cors' });
-      } catch (_) { /* ignore wake-up errors */ }
-
-      // Add timeout to prevent long waits
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 90000); // 90 second timeout
+      // Wait for backend to fully wake up (Render free tier cold start ~50s)
+      let serverReady = false;
+      for (let i = 0; i < 12; i++) {
+        try {
+          const ping = await fetch(`${apiUrl}/api/health`, { method: 'GET', mode: 'cors' });
+          if (ping.ok) { serverReady = true; break; }
+        } catch (_) {}
+        await new Promise(r => setTimeout(r, 5000)); // wait 5s between retries
+      }
+      if (!serverReady) {
+        setErrors(['Server could not be reached. Please try again in a minute.']);
+        setTimeout(() => setErrors([]), 8000);
+        setLoading(false);
+        return;
+      }
 
       const response = await fetch(`${apiUrl}/api/contact`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...formData, phone: `+91${formData.phone}` }),
-        signal: controller.signal,
       });
-      
-      clearTimeout(timeoutId);
+
       const data = await response.json();
 
       if (response.ok && data.success) {
@@ -132,11 +135,7 @@ const Contact = () => {
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      if (error.name === 'AbortError') {
-        setErrors(['Server is still waking up. Please wait 10 seconds and try again.']);
-      } else {
-        setErrors(['Unable to reach server. Please try again in a moment.']);
-      }
+      setErrors(['Unable to reach server. Please try again in a moment.']);
       setTimeout(() => setErrors([]), 8000);
     } finally {
       setLoading(false);
@@ -313,7 +312,7 @@ const Contact = () => {
               </div>
 
               <button type="submit" className="submit-btn-modern" disabled={loading}>
-                {loading ? <><span className="spinner"></span> <span>Sending... (may take up to 60s)</span></> : <><FaPaperPlane /> <span>Send Message</span></>}
+                {loading ? <><span className="spinner"></span> <span>Please wait, connecting...</span></> : <><FaPaperPlane /> <span>Send Message</span></>}
               </button>
             </form>
           </div>
