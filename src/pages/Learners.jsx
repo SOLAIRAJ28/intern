@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { FaStar, FaQuoteLeft, FaUserGraduate, FaBriefcase, FaGraduationCap, FaRocket, FaHandshake } from 'react-icons/fa';
 import './Learners.css';
 
@@ -120,9 +121,9 @@ const Learners = () => {
         <div className="cta-content">
           <h2>Ready to Write Your Success Story?</h2>
           <p>Join our community of successful professionals and transform your career today</p>
-          <a href="/programs" className="cta-button">
+          <Link to="/programs" className="cta-button">
             Start Your Journey
-          </a>
+          </Link>
         </div>
       </section>
     </div>
