@@ -123,7 +123,7 @@ This enquiry was submitted on ${new Date().toLocaleString()}
     // Wait for email to actually send before responding
     try {
       const { error: sendError } = await resend.emails.send({
-        from: 'Shanruck Technologies <onboarding@resend.dev>',
+        from: 'Shanruck Technologies <info@shanrucktechnologies.in>',
         to: [process.env.EMAIL_TO || 'info@shanrucktechnologies.in'],
         reply_to: email,
         subject: `New Enquiry from ${name} - ${course}`,
@@ -232,7 +232,7 @@ This query was submitted via chatbot on ${new Date().toLocaleString()}
     // Wait for email to actually send before responding
     try {
       const { error: sendError } = await resend.emails.send({
-        from: 'Shanruck Technologies <onboarding@resend.dev>',
+        from: 'Shanruck Technologies <info@shanrucktechnologies.in>',
         to: [process.env.EMAIL_TO || 'info@shanrucktechnologies.in'],
         reply_to: email,
         subject: `New Chatbot Query from ${name}`,
