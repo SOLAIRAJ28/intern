@@ -26,8 +26,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Initialize Nodemailer transporter with connection pooling for faster sends
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
-  port: parseInt(process.env.EMAIL_PORT) || 465,
-  secure: true,
+  port: parseInt(process.env.EMAIL_PORT) || 587,
+  secure: parseInt(process.env.EMAIL_PORT) === 465,
   pool: true,
   maxConnections: 5,
   maxMessages: 100,
@@ -35,9 +35,17 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-  socketTimeout: 10000,
-  greetingTimeout: 10000,
-  connectionTimeout: 10000,
+  socketTimeout: 15000,
+  greetingTimeout: 15000,
+  connectionTimeout: 15000,
+});
+
+// Log email config on startup (no password)
+console.log('📧 Email config:', {
+  host: process.env.EMAIL_HOST || '⚠️ NOT SET',
+  port: process.env.EMAIL_PORT || '⚠️ NOT SET',
+  user: process.env.EMAIL_USER || '⚠️ NOT SET',
+  pass: process.env.EMAIL_PASS ? '***set***' : '⚠️ NOT SET',
 });
 
 // Warm up the connection on server start
