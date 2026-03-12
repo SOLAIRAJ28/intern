@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 // Load environment variables
 dotenv.config();
@@ -23,39 +23,10 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Initialize Nodemailer transporter with connection pooling for faster sends
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST || 'smtpout.secureserver.net',
-  port: parseInt(process.env.EMAIL_PORT) || 587,
-  secure: parseInt(process.env.EMAIL_PORT) === 465,
-  pool: true,
-  maxConnections: 5,
-  maxMessages: 100,
-  auth: {
-    user: process.env.EMAIL_USER || 'info@shanrucktechnologies.in',
-    pass: process.env.EMAIL_PASS || 'Shanruck@016',
-  },
-  socketTimeout: 15000,
-  greetingTimeout: 15000,
-  connectionTimeout: 15000,
-});
+// Initialize Resend
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Log email config on startup (no password)
-console.log('📧 Email config:', {
-  host: process.env.EMAIL_HOST || '⚠️ NOT SET',
-  port: process.env.EMAIL_PORT || '⚠️ NOT SET',
-  user: process.env.EMAIL_USER || '⚠️ NOT SET',
-  pass: process.env.EMAIL_PASS ? '***set***' : '⚠️ NOT SET',
-});
-
-// Warm up the connection on server start
-transporter.verify((err) => {
-  if (err) {
-    console.error('❌ SMTP connection error:', err.message);
-  } else {
-    console.log('✅ SMTP connection ready');
-  }
-});
+console.log('📧 Resend API key:', process.env.RESEND_API_KEY ? '***set***' : '⚠️ NOT SET');
 
 // Validation helper functions
 const validateEmail = (email) => {
@@ -151,15 +122,16 @@ This enquiry was submitted on ${new Date().toLocaleString()}
 
     // Wait for email to actually send before responding
     try {
-      await transporter.sendMail({
-        from: `"Shanruck Website" <${process.env.EMAIL_USER}>`,
-        to: process.env.EMAIL_TO || 'info@shanrucktechnologies.in',
-        replyTo: email,
+      const { error: sendError } = await resend.emails.send({
+        from: 'Shanruck Technologies <onboarding@resend.dev>',
+        to: [process.env.EMAIL_TO || 'info@shanrucktechnologies.in'],
+        reply_to: email,
         subject: `New Enquiry from ${name} - ${course}`,
         text: emailContent,
         html: mailOptions.html,
       });
-      console.log('✅ Email sent successfully to:', process.env.EMAIL_TO);
+      if (sendError) throw new Error(sendError.message);
+      console.log('✅ Email sent successfully to:', process.env.EMAIL_TO || 'info@shanrucktechnologies.in');
     } catch (emailError) {
       console.error('❌ Email sending failed:', emailError.message);
       return res.status(500).json({
@@ -259,14 +231,15 @@ This query was submitted via chatbot on ${new Date().toLocaleString()}
 
     // Wait for email to actually send before responding
     try {
-      await transporter.sendMail({
-        from: `"Shanruck Chatbot" <${process.env.EMAIL_USER}>`,
-        to: process.env.EMAIL_TO || 'info@shanrucktechnologies.in',
-        replyTo: email,
+      const { error: sendError } = await resend.emails.send({
+        from: 'Shanruck Technologies <onboarding@resend.dev>',
+        to: [process.env.EMAIL_TO || 'info@shanrucktechnologies.in'],
+        reply_to: email,
         subject: `New Chatbot Query from ${name}`,
         text: emailContent,
         html: mailOptions.html,
       });
+      if (sendError) throw new Error(sendError.message);
       console.log('✅ Chatbot query email sent successfully');
     } catch (emailError) {
       console.error('❌ Chatbot email sending failed:', emailError.message);
