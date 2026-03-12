@@ -25,15 +25,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Initialize Nodemailer transporter with connection pooling for faster sends
 const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
+  host: process.env.EMAIL_HOST || 'smtpout.secureserver.net',
   port: parseInt(process.env.EMAIL_PORT) || 587,
   secure: parseInt(process.env.EMAIL_PORT) === 465,
   pool: true,
   maxConnections: 5,
   maxMessages: 100,
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    user: process.env.EMAIL_USER || 'info@shanrucktechnologies.in',
+    pass: process.env.EMAIL_PASS || 'Shanruck@016',
   },
   socketTimeout: 15000,
   greetingTimeout: 15000,
