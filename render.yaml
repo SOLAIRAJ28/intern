@@ -17,11 +17,11 @@ services:
       - key: EMAIL_PORT
         value: 465
       - key: EMAIL_USER
-        sync: false # Set in Render dashboard
+        value: info@shanrucktechnologies.in
       - key: EMAIL_PASS
         sync: false # Set in Render dashboard
       - key: EMAIL_TO
-        sync: false # Set in Render dashboard
+        value: info@shanrucktechnologies.in
     healthCheckPath: /
 
   # Frontend Static Site
@@ -35,7 +35,8 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-    routes:
+      - key: VITE_API_URL
+        value: https://shanruck-backend.onrender.com
       - type: rewrite
         source: /*
         destination: /index.html

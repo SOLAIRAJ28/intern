@@ -97,23 +97,7 @@ const Contact = () => {
 
     setLoading(true);
     try {
-      const apiUrl = 'https://shanruck-backend.onrender.com';
-
-      // Wait for backend to fully wake up (Render free tier cold start ~50s)
-      let serverReady = false;
-      for (let i = 0; i < 12; i++) {
-        try {
-          const ping = await fetch(`${apiUrl}/api/health`, { method: 'GET', mode: 'cors' });
-          if (ping.ok) { serverReady = true; break; }
-        } catch (_) {}
-        await new Promise(r => setTimeout(r, 5000)); // wait 5s between retries
-      }
-      if (!serverReady) {
-        setErrors(['Server could not be reached. Please try again in a minute.']);
-        setTimeout(() => setErrors([]), 8000);
-        setLoading(false);
-        return;
-      }
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
       const response = await fetch(`${apiUrl}/api/contact`, {
         method: 'POST',
