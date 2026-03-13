@@ -496,8 +496,36 @@
 }
 
 @media screen and (max-width: 480px) {
+  .learners-stats,
+  .testimonials-section,
+  .success-metrics,
+  .learners-cta {
+    padding: 40px 15px;
+  }
+
   .stats-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .stat-item {
+    padding: 20px 12px;
+  }
+
+  .stat-item h3 {
+    font-size: 1.9rem;
+  }
+
+  .section-header h1 {
+    font-size: 1.7rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .section-header p {
+    font-size: 0.95rem;
   }
   
   .carousel-btn.prev-btn,
@@ -508,10 +536,33 @@
   .testimonial-card {
     min-width: calc(100vw - 60px);
     max-width: calc(100vw - 60px);
+    padding: 20px;
   }
   
   .carousel-wrapper {
     padding: 0;
+  }
+
+  .success-metrics h2 {
+    font-size: 1.6rem;
+    margin-bottom: 35px;
+  }
+
+  .metric-card {
+    padding: 25px 18px;
+  }
+
+  .cta-content h2 {
+    font-size: 1.6rem;
+  }
+
+  .cta-content p {
+    font-size: 1.05rem;
+  }
+
+  .cta-button {
+    padding: 14px 30px;
+    font-size: 1rem;
   }
 }
 

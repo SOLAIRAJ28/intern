@@ -288,6 +288,15 @@ textarea.input-modern {
   box-shadow: 0 8px 20px rgba(232, 53, 112, 0.25);
 }
 
+/* Warmup hint shown when Render backend cold-starts */
+.warmup-message {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: #6b7280;
+  text-align: center;
+  font-style: italic;
+}
+
 /* Spinner Animation */
 .spinner {
   width: 18px;
@@ -536,5 +545,45 @@ textarea.input-modern {
 
   .contact-container-modern {
     padding: 60px 15px 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-header-modern h1 {
+    font-size: 1.9rem;
+  }
+
+  .contact-header-modern .badge {
+    font-size: 1.6rem;
+  }
+
+  .contact-info-panel {
+    padding: 25px 16px;
+  }
+
+  .contact-form-panel {
+    padding: 25px 16px;
+  }
+
+  .contact-container-modern {
+    padding: 40px 12px 30px;
+  }
+
+  .submit-btn-modern {
+    width: 100%;
+    align-self: stretch;
+  }
+
+  .message-banner {
+    right: 10px;
+    top: 10px;
+    left: 10px;
+    max-width: calc(100vw - 20px);
+    min-width: unset;
+    width: auto;
+  }
+
+  .map-wrapper-modern {
+    height: 280px;
   }
 }

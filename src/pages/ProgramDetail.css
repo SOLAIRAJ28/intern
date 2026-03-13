@@ -459,6 +459,30 @@
 }
 
 /* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .program-hero {
+    padding: 80px 30px 50px;
+  }
+
+  .program-meta {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .modules-section {
+    padding: 80px 30px;
+  }
+
+  .modules-container h2 {
+    font-size: 2.2rem;
+  }
+
+  .program-cta {
+    margin-top: 60px;
+    padding: 40px 30px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .program-hero {
     padding: 60px 20px 40px;
@@ -541,5 +565,39 @@
   .enroll-btn {
     padding: 14px 32px;
     font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .program-hero {
+    padding: 40px 15px 30px;
+  }
+
+  .modules-section {
+    padding: 40px 15px;
+  }
+
+  .hero-text h1 {
+    font-size: 1.7rem;
+  }
+
+  .modules-container h2 {
+    font-size: 1.7rem;
+  }
+
+  .module-card {
+    padding: 18px 15px;
+  }
+
+  .module-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .program-cta {
+    padding: 30px 15px;
+  }
+
+  .program-cta h3 {
+    font-size: 1.5rem;
   }
 }

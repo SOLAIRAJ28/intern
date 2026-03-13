@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   FaMapMarkerAlt, 
   FaPhoneAlt, 
@@ -26,6 +26,15 @@ const Contact = () => {
   const [errors, setErrors] = useState([]);
   const [touched, setTouched] = useState({});
   const [fieldErrors, setFieldErrors] = useState({ email: '', phone: '' });
+  const [loadingMessage, setLoadingMessage] = useState('');
+
+  const apiUrl = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000' : 'https://shanruck-backend.onrender.com');
+
+  // Ping the backend health endpoint on mount to pre-warm the Render free-tier server
+  // (free-tier spins down after 15 min of inactivity; this triggers wake-up while user fills the form)
+  useEffect(() => {
+    fetch(`${apiUrl}/api/health`).catch(() => {});
+  }, []);
 
   const validateEmail = (email) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -96,16 +105,22 @@ const Contact = () => {
     }
 
     setLoading(true);
-    try {
-      const defaultApiUrl = import.meta.env.DEV
-        ? 'http://localhost:5000'
-        : 'https://shanruck-backend.onrender.com';
-      const apiUrl = import.meta.env.VITE_API_URL || defaultApiUrl;
+    setLoadingMessage('');
 
+    const controller = new AbortController();
+    // Abort if server doesn't respond within 60 seconds
+    const abortTimer = setTimeout(() => controller.abort(), 60000);
+    // Show warm-up hint if the request takes more than 8 seconds (Render cold start)
+    const warmupTimer = setTimeout(() => {
+      setLoadingMessage('Server is warming up, please wait a moment...');
+    }, 8000);
+
+    try {
       const response = await fetch(`${apiUrl}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...formData, phone: `+91${formData.phone}` }),
+        signal: controller.signal,
       });
 
       const data = await response.json();
@@ -122,9 +137,16 @@ const Contact = () => {
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      setErrors(['Unable to reach server. Please try again in a moment.']);
+      if (error.name === 'AbortError') {
+        setErrors(['Server is taking too long to respond. Please try again in a moment.']);
+      } else {
+        setErrors(['Unable to reach server. Please try again in a moment.']);
+      }
       setTimeout(() => setErrors([]), 8000);
     } finally {
+      clearTimeout(abortTimer);
+      clearTimeout(warmupTimer);
+      setLoadingMessage('');
       setLoading(false);
     }
   };
@@ -301,6 +323,7 @@ const Contact = () => {
               <button type="submit" className="submit-btn-modern" disabled={loading}>
                 {loading ? <><span className="spinner"></span> <span>Please wait, connecting...</span></> : <><FaPaperPlane /> <span>Send Message</span></>}
               </button>
+              {loadingMessage && <p className="warmup-message">{loadingMessage}</p>}
             </form>
           </div>
 

@@ -571,4 +571,44 @@
   }
 }
 
+@media screen and (max-width: 480px) {
+  .about-main,
+  .values-section,
+  .difference-section {
+    padding: 45px 15px;
+  }
 
+  .vision-mission-wrapper {
+    padding: 45px 15px;
+  }
+
+  .vision-container,
+  .mission-container {
+    padding: 28px 18px;
+  }
+
+  .section-header h1 {
+    font-size: 1.7rem;
+  }
+
+  .about-text h2,
+  .vision-section h2,
+  .mission-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .values-header h2,
+  .difference-section h2,
+  .values-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .image-placeholder {
+    width: 200px;
+    height: 200px;
+  }
+
+  .placeholder-icon {
+    font-size: 5rem;
+  }
+}

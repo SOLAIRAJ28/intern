@@ -92,6 +92,11 @@
     padding: 0 30px;
   }
 
+  .navbar-logo-img {
+    width: 180px;
+    height: 55px;
+  }
+
   .menu-icon {
     display: block;
   }
@@ -132,6 +137,17 @@
   .nav-item {
     width: 100%;
     height: auto;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar-container {
+    padding: 0 15px;
+  }
+
+  .navbar-logo-img {
+    width: 140px;
+    height: 42px;
   }
 }
 

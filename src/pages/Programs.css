@@ -371,4 +371,33 @@
   }
 }
 
+@media screen and (max-width: 480px) {
+  .programs-section,
+  .benefits-section,
+  .programs-cta {
+    padding: 45px 15px;
+  }
+
+  .section-header h1 {
+    font-size: 1.7rem;
+  }
+
+  .benefits-section h2,
+  .cta-content h2 {
+    font-size: 1.6rem;
+  }
+
+  .program-card {
+    padding: 22px 18px;
+  }
+
+  .benefit-item {
+    padding: 22px 18px;
+  }
+
+  .cta-button {
+    padding: 14px 30px;
+    font-size: 1rem;
+  }
+}
 

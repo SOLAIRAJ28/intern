@@ -695,13 +695,32 @@
     gap: 40px;
   }
 
+  .hero-text {
+    text-align: center;
+  }
+
+  .hero-title {
+    text-align: center !important;
+  }
+
+  .hero-features {
+    align-items: center;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
   .hero-image {
     height: 300px;
+    justify-content: center;
   }
-  
+
   .orbit-container {
     width: 380px;
     height: 380px;
+    margin-left: 0;
+    margin: 0 auto;
   }
   
   .orbit-outer {
@@ -757,7 +776,7 @@
 
 @media screen and (max-width: 768px) {
   .hero {
-    padding: 60px 30px;
+    padding: 60px 20px;
   }
 
   .hero-title {
@@ -774,18 +793,27 @@
     display: none;
   }
 
+  .hero-features-row {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   .hero-buttons {
     flex-direction: column;
+    align-items: stretch;
   }
 
   .btn {
     text-align: center;
     justify-content: center;
+    width: 100%;
   }
   
   .orbit-container {
     width: 320px;
     height: 320px;
+    margin-left: 0;
+    margin: 0 auto;
   }
   
   .orbit-outer {
@@ -857,5 +885,97 @@
   }
 }
 
+@media screen and (max-width: 480px) {
+  .hero {
+    padding: 40px 16px;
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+  }
+
+  .feature-item {
+    font-size: 0.85rem;
+  }
+
+  .feat-dot {
+    font-size: 0.85rem;
+  }
+
+  .hero-image {
+    height: 240px;
+  }
+
+  .orbit-container {
+    width: 260px;
+    height: 260px;
+  }
+
+  .orbit-outer {
+    width: 230px;
+    height: 230px;
+  }
+
+  .orbit-inner {
+    width: 148px;
+    height: 148px;
+  }
+
+  .orbit-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .orbit-icon svg {
+    font-size: 0.85rem;
+  }
+
+  .orbit-icon-inner {
+    width: 30px;
+    height: 30px;
+  }
+
+  .orbit-icon-inner svg {
+    font-size: 0.8rem;
+  }
+
+  .orbit-center {
+    width: 72px;
+    height: 72px;
+  }
+
+  .center-logo {
+    width: 58px;
+    height: 58px;
+  }
+
+  .btn {
+    padding: 12px 22px;
+    font-size: 0.95rem;
+  }
+
+  .stats-section {
+    padding: 40px 16px;
+  }
+
+  .highlight-section,
+  .why-choose {
+    padding: 50px 16px;
+  }
+
+  .stat-card {
+    padding: 25px 20px;
+  }
+
+  .highlight-content h2,
+  .why-choose h2 {
+    font-size: 1.6rem;
+  }
+
+  .highlight-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}
 
 

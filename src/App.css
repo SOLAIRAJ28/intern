@@ -12,6 +12,7 @@
 /* Smooth Scrolling */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /* Custom Scrollbar */
@@ -66,6 +67,12 @@ html {
 
 @media screen and (max-width: 768px) {
   .container {
-    padding: 0 30px;
+    padding: 0 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 0 15px;
   }
 }
