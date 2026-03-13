@@ -10,14 +10,30 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const defaultAllowedOrigins = [
+  'https://shanruck-frontend.onrender.com',
+  'https://shanrucktechnologies.in',
+  'https://www.shanrucktechnologies.in',
+  'http://localhost:5173',
+  'http://localhost:5174',
+];
+
+const envAllowedOrigins = (process.env.FRONTEND_ORIGINS || '')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+const allowedOrigins = [...new Set([...defaultAllowedOrigins, ...envAllowedOrigins])];
+
 // Middleware
 app.use(cors({
-  origin: [
-    'https://shanrucktecknologies-frontend.onrender.com',
-    'http://localhost:5173',
-    'http://localhost:5174',
-  ],
-  methods: ['GET', 'POST'],
+  origin: (origin, callback) => {
+    // Allow server-to-server calls and tools like curl/Postman (no browser origin header).
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error(`CORS blocked for origin: ${origin}`));
+  },
+  methods: ['GET', 'POST', 'OPTIONS'],
   credentials: true,
 }));
 app.use(bodyParser.json());

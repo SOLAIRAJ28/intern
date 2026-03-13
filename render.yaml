@@ -22,7 +22,11 @@ services:
         sync: false # Set in Render dashboard
       - key: EMAIL_TO
         value: info@shanrucktechnologies.in
-    healthCheckPath: /
+      - key: RESEND_API_KEY
+        sync: false # Set in Render dashboard
+      - key: FRONTEND_ORIGINS
+        value: https://shanruck-frontend.onrender.com,https://shanrucktechnologies.in,https://www.shanrucktechnologies.in
+    healthCheckPath: /api/health
 
   # Frontend Static Site
   - type: web

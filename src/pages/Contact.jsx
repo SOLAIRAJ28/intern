@@ -97,7 +97,10 @@ const Contact = () => {
 
     setLoading(true);
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const defaultApiUrl = import.meta.env.DEV
+        ? 'http://localhost:5000'
+        : 'https://shanruck-backend.onrender.com';
+      const apiUrl = import.meta.env.VITE_API_URL || defaultApiUrl;
 
       const response = await fetch(`${apiUrl}/api/contact`, {
         method: 'POST',
