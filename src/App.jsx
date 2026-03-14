@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
@@ -23,6 +23,8 @@ function App() {
             <Route path="/program/:id" element={<ProgramDetail />} />
             <Route path="/learners" element={<Learners />} />
             <Route path="/contact" element={<Contact />} />
+            {/* Redirect old links to about page */}
+            <Route path="/more-about-me" element={<Navigate to="/about" replace />} />
           </Routes>
         </main>
         <Footer />
