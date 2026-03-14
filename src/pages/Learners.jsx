@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { FaStar, FaQuoteLeft, FaUserGraduate, FaBriefcase, FaGraduationCap, FaRocket, FaHandshake } from 'react-icons/fa';
 import './Learners.css';
@@ -47,6 +48,10 @@ const Learners = () => {
 
   return (
     <div className="learners">
+      <Helmet>
+        <title>Student Success Stories | Shanruck Technologies</title>
+        <meta name="description" content="Read real success stories and reviews from students who achieved their career goals with Shanruck Technologies." />
+      </Helmet>
       {/* Testimonials Section */}
       <section className="testimonials-section">
         <div className="testimonials-container">

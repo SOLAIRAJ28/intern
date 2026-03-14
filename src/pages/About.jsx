@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { 
   FaLightbulb, 
   FaCompass, 
@@ -12,6 +13,10 @@ import './About.css';
 const About = () => {
   return (
     <div className="about">
+      <Helmet>
+        <title>About Us | Shanruck Technologies</title>
+        <meta name="description" content="Learn about Shanruck Technologies, our vision, mission, and the core values that drive our tech education and software solutions." />
+      </Helmet>
       {/* Main About Section */}
       <section className="about-main">
         <div className="about-container">

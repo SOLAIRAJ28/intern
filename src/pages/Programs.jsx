@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { 
   FaCode, 
@@ -81,6 +82,10 @@ const Programs = () => {
 
   return (
     <div className="programs">
+      <Helmet>
+        <title>Our Training Programs | Shanruck Technologies</title>
+        <meta name="description" content="Explore our training programs in Full Stack, Python, Java, WordPress, UI/UX, and Cybersecurity. Hands-on projects and placement support included." />
+      </Helmet>
       {/* Programs Section */}
       <section className="programs-section">
         <div className="programs-container">

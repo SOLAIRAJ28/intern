@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { useState, useEffect } from 'react';
 import { 
   FaMapMarkerAlt, 
@@ -153,6 +154,10 @@ const Contact = () => {
 
   return (
     <div className="contact-page-wrapper">
+      <Helmet>
+        <title>Contact Us | Shanruck Technologies</title>
+        <meta name="description" content="Get in touch with Shanruck Technologies. Our friendly team is ready to answer your questions and collaborate." />
+      </Helmet>
       {success && (
         <div className="message-banner success-banner">
           <FaCheckCircle className="message-icon" />

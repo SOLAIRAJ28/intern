@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { 
   FaLaptopCode, 
@@ -22,6 +23,10 @@ import './Home.css';
 const Home = () => {
   return (
     <div className="home">
+      <Helmet>
+        <title>Home | Shanruck Technologies</title>
+        <meta name="description" content="Ignite passion, empower skills, and build careers with Shanruck Technologies. Explore our software capabilities and training programs." />
+      </Helmet>
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">

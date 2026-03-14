@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { 
@@ -1035,6 +1036,9 @@ const ProgramDetail = () => {
   if (!program) {
     return (
       <div className="program-detail">
+        <Helmet>
+          <title>Program Not Found | Shanruck Technologies</title>
+        </Helmet>
         <div className="not-found">
           <h2>Program Not Found</h2>
           <Link to="/programs" className="back-btn">
@@ -1047,6 +1051,10 @@ const ProgramDetail = () => {
 
   return (
     <div className="program-detail">
+      <Helmet>
+        <title>{program.title} | Shanruck Technologies</title>
+        <meta name="description" content={`Explore our ${program.title} program. ${program.description}`} />
+      </Helmet>
       {/* Course Modules Section */}
       <section className="modules-section">
         <div className="modules-container">
