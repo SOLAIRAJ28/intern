@@ -40,7 +40,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Initialize Resend
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 console.log('📧 Resend API key:', process.env.RESEND_API_KEY ? '***set***' : '⚠️ NOT SET');
 
@@ -138,16 +138,20 @@ This enquiry was submitted on ${new Date().toLocaleString()}
 
     // Wait for email to actually send before responding
     try {
-      const { error: sendError } = await resend.emails.send({
-        from: 'Shanruck Technologies <info@shanrucktechnologies.in>',
-        to: [process.env.EMAIL_TO || 'info@shanrucktechnologies.in'],
-        reply_to: email,
-        subject: `New Enquiry from ${name} - ${course}`,
-        text: emailContent,
-        html: mailOptions.html,
-      });
-      if (sendError) throw new Error(sendError.message);
-      console.log('✅ Email sent successfully to:', process.env.EMAIL_TO || 'info@shanrucktechnologies.in');
+      if (resend) {
+        const { error: sendError } = await resend.emails.send({
+          from: 'Shanruck Technologies <info@shanrucktechnologies.in>',
+          to: [process.env.EMAIL_TO || 'info@shanrucktechnologies.in'],
+          reply_to: email,
+          subject: `New Enquiry from ${name} - ${course}`,
+          text: emailContent,
+          html: mailOptions.html,
+        });
+        if (sendError) throw new Error(sendError.message);
+        console.log('✅ Email sent successfully to:', process.env.EMAIL_TO || 'info@shanrucktechnologies.in');
+      } else {
+        console.log('⚠️ Resend is not configured, skipping email send. Received enquiry from:', email);
+      }
     } catch (emailError) {
       console.error('❌ Email sending failed:', emailError.message);
       return res.status(500).json({
@@ -247,16 +251,20 @@ This query was submitted via chatbot on ${new Date().toLocaleString()}
 
     // Wait for email to actually send before responding
     try {
-      const { error: sendError } = await resend.emails.send({
-        from: 'Shanruck Technologies <info@shanrucktechnologies.in>',
-        to: [process.env.EMAIL_TO || 'info@shanrucktechnologies.in'],
-        reply_to: email,
-        subject: `New Chatbot Query from ${name}`,
-        text: emailContent,
-        html: mailOptions.html,
-      });
-      if (sendError) throw new Error(sendError.message);
-      console.log('✅ Chatbot query email sent successfully');
+      if (resend) {
+        const { error: sendError } = await resend.emails.send({
+          from: 'Shanruck Technologies <info@shanrucktechnologies.in>',
+          to: [process.env.EMAIL_TO || 'info@shanrucktechnologies.in'],
+          reply_to: email,
+          subject: `New Chatbot Query from ${name}`,
+          text: emailContent,
+          html: mailOptions.html,
+        });
+        if (sendError) throw new Error(sendError.message);
+        console.log('✅ Chatbot query email sent successfully');
+      } else {
+        console.log('⚠️ Resend is not configured, skipping chatbot email send. Received query from:', email);
+      }
     } catch (emailError) {
       console.error('❌ Chatbot email sending failed:', emailError.message);
       return res.status(500).json({
