@@ -24,8 +24,8 @@ const Home = () => {
   return (
     <div className="home">
       <Helmet>
-        <title>Home | Shanruck Technologies</title>
-        <meta name="description" content="Ignite passion, empower skills, and build careers with Shanruck Technologies. Explore our software capabilities and training programs." />
+        <title>Shanruck Technologies</title>
+        <meta name="description" content="We provide immersive bootcamps and training programs to help individuals gain the skills they need to succeed in today's job market." />
       </Helmet>
       {/* Hero Section */}
       <section className="hero">
