@@ -31,6 +31,8 @@ const ProgramDetail = () => {
   const programsData = {
     1: {
       icon: <FaCode />,
+      title: 'Full Stack Web Development',
+      description: 'Master both front-end and back-end technologies. Learn HTML, CSS, JavaScript, React, Node.js, Express, MongoDB, and build complete web applications from scratch.',
       duration: '20 Weeks',
       level: 'Beginner to Advanced',
       color: '#667eea',
