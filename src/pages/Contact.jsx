@@ -198,7 +198,7 @@ const Contact = () => {
                   <div className="modern-info-icon"><FaPhoneAlt /></div>
                   <div className="modern-info-text">
                     <h4>Phone Number</h4>
-                    <p>+91 72004 31181</p>
+                    <p>+91 99442 91189<br />+91 72004 31189</p>
                   </div>
                 </div>
 
